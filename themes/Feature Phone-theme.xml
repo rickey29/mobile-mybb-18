@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme name="Feature Phone" version="1804">
+	<properties>
+		<templateset><![CDATA[2]]></templateset>
+		<editortheme><![CDATA[mybb.css]]></editortheme>
+		<imgdir><![CDATA[images]]></imgdir>
+		<logo><![CDATA[images/logo.png]]></logo>
+		<tablespace><![CDATA[5]]></tablespace>
+		<borderwidth><![CDATA[0]]></borderwidth>
+		<color><![CDATA[]]></color>
+		<disporder><![CDATA[a:7:{s:10:"global.css";i:1;s:10:"usercp.css";i:2;s:9:"modcp.css";i:3;s:16:"star_ratings.css";i:4;s:14:"showthread.css";i:5;s:17:"thread_status.css";i:6;s:8:"css3.css";i:7;}]]></disporder>
+	</properties>
+	<stylesheets>
+	</stylesheets>
+	<templates>
+		<template name="error" version="1804"><![CDATA[<html>
+<head>
+<title>{$title}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+</div>
+<hr />
+<div>
+{$title}
+<br />
+{$error}
+{$footer}
+</body>
+</html>]]></template>
+		<template name="footer" version="1804"><![CDATA[</div>]]></template>
+		<template name="footer_personal" version="1804"><![CDATA[</div>
+<hr />
+<div>
+{$lang->feature_phone_personal_footer}]]></template>
+		<template name="forumbit_depth1_cat" version="1804"><![CDATA[</div>
+<hr />
+<div>
+{$forum['name']}
+{$sub_forums}]]></template>
+		<template name="forumbit_depth2_forum" version="1804"><![CDATA[<br />
+<a href="{$forum_url}">{$forum['name']}</a>
+<br />
+{$forum['description']}
+&nbsp;
+( {$threads} / {$posts} )
+{$lastpost}]]></template>
+		<template name="forumbit_depth2_forum_lastpost" version="1804"><![CDATA[&nbsp;
+<a href="{$lastpost_link}">{$lastpost_date}</a>]]></template>
+		<template name="forumbit_depth2_forum_lastpost_hidden" version="1804"><![CDATA[]]></template>
+		<template name="forumbit_depth2_forum_lastpost_never" version="1804"><![CDATA[]]></template>
+		<template name="forumdisplay" version="1804"><![CDATA[<html>
+<head>
+<title>{$foruminfo['name']}</title>
+{$headerinclude}
+{$rssdiscovery}
+</head>
+<body>
+{$header}
+{$subforums}
+{$threadslist}
+{$footer}
+</body>
+</html>]]></template>
+		<template name="forumdisplay_announcements" version="1804"><![CDATA[<br />
+{$lang->forum_announcements}
+{$announcements}]]></template>
+		<template name="forumdisplay_announcements_announcement" version="1804"><![CDATA[<br />
+<a href="{$announcement['announcementlink']}">{$announcement['subject']}</a>
+<br />
+{$announcement['username']} &gt; {$postdate}]]></template>
+		<template name="forumdisplay_nothreads" version="1804"><![CDATA[<br />
+{$lang->nothreads}]]></template>
+		<template name="forumdisplay_sticky_sep" version="1804"><![CDATA[<br />
+{$lang->sticky_threads}]]></template>
+		<template name="forumdisplay_subforums" version="1804"><![CDATA[</div>
+<hr />
+<div>
+{$lang->sub_forums_in}
+{$forums}]]></template>
+		<template name="forumdisplay_thread" version="1804"><![CDATA[<br />
+<a href="{$thread['threadlink']}">{$thread['subject']}</a>
+<br />
+{$thread['threadusername']}
+&nbsp;
+( <a href="{$thread['lastpostlink']}">{$thread['replies']} / {$thread['views']}</a> )]]></template>
+		<template name="forumdisplay_threadlist" version="1804"><![CDATA[</div>
+<hr />
+<div>
+{$foruminfo['name']}
+{$announcementlist}
+{$threads}
+{$multipage}]]></template>
+		<template name="forumdisplay_threads_sep" version="1804"><![CDATA[<br />
+{$lang->normal_threads}]]></template>
+		<template name="header" version="1804"><![CDATA[<div>
+<a href="{$mybb->settings['bburl']}/index.php?m-mode=option">{$lang->options}</a>
+&nbsp;
+{$mybb->settings['bbname']}
+{$header_personal}
+<navigation>]]></template>
+		<template name="headerinclude" version="1804"><![CDATA[<link rel="alternate" type="application/rss+xml" title="{$lang->latest_threads} (RSS 2.0)" href="{$mybb->settings['bburl']}/syndication.php" />
+<link rel="alternate" type="application/atom+xml" title="{$lang->latest_threads} (Atom 1.0)" href="{$mybb->settings['bburl']}/syndication.php?type=atom1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style type="text/css">
+img { max-width: 100%; height: auto; }
+</style>]]></template>
+		<template name="header_option" version="1804"><![CDATA[<div>
+{$lang->options}]]></template>
+		<template name="header_personal" version="1804"><![CDATA[</div>
+<hr />
+<div>
+{$lang->feature_phone_personal_header}]]></template>
+		<template name="header_welcomeblock_guest" version="1804"><![CDATA[<a href="{$mybb->settings['bburl']}/member.php?action=login">{$lang->welcome_login}</a>
+<br />]]></template>
+		<template name="header_welcomeblock_member" version="1804"><![CDATA[<a href="{$mybb->settings['bburl']}/member.php?action=logout&amp;logoutkey={$mybb->user['logoutkey']}">{$lang->welcome_logout}</a>
+<br />]]></template>
+		<template name="htmldoctype" version="1804"><![CDATA[<!DOCTYPE html>]]></template>
+		<template name="index" version="1804"><![CDATA[<html>
+<head>
+<title>{$mybb->settings['bbname']}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+{$forums}
+{$footer_personal}
+{$footer}
+</body>
+</html>]]></template>
+		<template name="index_option" version="1804"><![CDATA[<html>
+<head>
+<title>{$lang->options}</title>
+{$headerinclude}
+</head>
+<body>
+{$header_option}
+{$index_panel}
+{$footer}
+</body>
+</html>]]></template>
+		<template name="index_panel" version="1804"><![CDATA[</div>
+<hr />
+<div>
+{$welcomeblock}
+<a href="{$mybb->settings['bburl']}/index.php?m-redirection=desktop">{$lang->switch_to_deskto_style}</a>]]></template>
+		<template name="member_loggedin_notice" version="1804"><![CDATA[<br />
+{$lang->already_logged_in}]]></template>
+		<template name="member_login" version="1804"><![CDATA[<html>
+<head>
+<title>{$lang->login}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+</div>
+<hr />
+<div>
+{$lang->login}
+{$inline_errors}
+{$member_loggedin_notice}
+<form action="member.php" method="post">
+<label for="username">{$lang->username}</label>
+<br />
+<input type="text" name="username" id="username" size="25" value="{$username}" placeholder="{$lang->username}" />
+<br />
+<label for="password">{$lang->password}<br />{$lang->pw_note}</label>
+<br />
+<input type="password" name="password" id="password" size="25" value="{$password}" placeholder="{$lang->password}" />
+<br />
+<label for="remember">{$lang->remember_me}</label>
+<input type="checkbox" name="remember" id="remember" checked="checked" value="yes" />
+{$captcha}
+<br />
+<input type="submit" name="submit" value="{$lang->login}" />
+<input type="hidden" name="action" value="do_login" />
+<input type="hidden" name="url" value="{$redirect_url}" />
+</form>
+<a href="member.php?action=lostpw">{$lang->lostpw_note}</a>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="member_lostpw" version="1804"><![CDATA[<html>
+<head>
+<title>{$lang->lost_pw}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+</div>
+<hr />
+<div>
+{$lang->lost_pw_form}
+<form action="member.php" method="post">
+<label for="email">{$lang->email_address}</label>
+<br />
+<input type="text" name="email" id="email" placeholder="{$lang->email_address}" />
+<br />
+<input type="submit" value="{$lang->request_user_pass}" />
+<input type="hidden" name="action" value="do_lostpw" />
+</form>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="multipage" version="1804"><![CDATA[</div>
+<hr />
+<div>
+{$start}
+{$prevpage}
+{$nextpage}
+{$end}]]></template>
+		<template name="multipage_end" version="1804"><![CDATA[&nbsp;
+<a href="{$page_url}">{$lang->multipage_last}</a>]]></template>
+		<template name="multipage_nextpage" version="1804"><![CDATA[<a href="{$page_url}">{$lang->multipage_next}</a>]]></template>
+		<template name="multipage_prevpage" version="1804"><![CDATA[<a href="{$page_url}">{$lang->multipage_previous}</a>
+&nbsp;]]></template>
+		<template name="multipage_start" version="1804"><![CDATA[<a href="{$page_url}">{$lang->multipage_first}</a>
+&nbsp;]]></template>
+		<template name="nav" version="1804"><![CDATA[</div>
+<hr />
+<div>
+{$nav}
+{$activebit}]]></template>
+		<template name="nav_bit" version="1804"><![CDATA[<a href="{$navbit['url']}">{$navbit['name']}</a>
+&nbsp;&gt;&nbsp;]]></template>
+		<template name="nav_bit_active" version="1804"><![CDATA[<a href="{$navbit['url']}">{$navbit['name']}</a>]]></template>
+		<template name="postbit" version="1804"><![CDATA[</div>
+<hr />
+<div>
+{$post['subject']}
+<br />
+{$post['username']} &gt; {$post['postdate']}
+<br />
+{$post['message']}]]></template>
+		<template name="post_captcha" version="1804"><![CDATA[<br />
+<label for="imagestring">{$lang->image_verification}</label>
+<br />
+<img src="{$mybb->settings['bburl']}/captcha.php?imagehash={$imagehash}" id="captcha_img" />
+<br />
+<input type="submit" name="refresh" id="refresh" value="{$lang->refresh}" />
+<br />
+<label for="imagestring">{$lang->verification_note}<br />{$lang->verification_subnote}</label>
+<br />
+<input type="text" name="imagestring" value="" id="imagestring" size="16" placeholder="{$lang->image_verification}" />
+<input type="hidden" name="imagehash" value="{$imagehash}" id="imagehash" />]]></template>
+		<template name="redirect" version="1804"><![CDATA[<html>
+<head>
+<title>{$title}</title>
+<meta http-equiv="refresh" content="2;URL={$url}" />
+{$headerinclude}
+</head>
+<body>
+{$header}
+</div>
+<hr />
+<div>
+{$title}
+<br />
+{$message}
+<br />
+<a href="{$url}">{$lang->click_no_wait}</a>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="showthread" version="1804"><![CDATA[<html>
+<head>
+<title>{$thread['subject']}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+</div>
+<hr />
+<div>
+{$thread['subject']}
+{$posts}
+</div>
+<hr />
+<div>
+<a href="{$next_oldest_link}">{$lang->next_oldest}</a>
+&nbsp;
+<a href="{$next_newest_link}">{$lang->next_newest}</a>
+{$multipage}
+{$footer}
+</body>
+</html>]]></template>
+	</templates>
+</theme>
