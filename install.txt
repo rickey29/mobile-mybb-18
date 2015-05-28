@@ -8,196 +8,27 @@ Please backup your database.  This step is not mandatory for MMyBB18 installatio
 
 step 2:
 ================
-Please backup following files.  This step is not mandatory for MMyBB18 installation.  However, it provides convenience when you want to restore the system in case of any unhappy.
--- http://yoursite.com/global.php
--- http://yoursite.com/inc/functions.php
--- http://yoursite.com/inc/languages/english/global.lang.php
--- http://yoursite.com/index.php
--- http://yoursite.com/member.php
+Extract MMyBB18 zip package on your PC, you will get a "mmybb18" directory.
 
 step 3:
 ================
-Extract MMyBB18 zip package on your PC, you will get a "mmybb18" directory.
+Upload following directory and files from the "mmybb18" directory to your web site:
+-- inc/plugins/mmybb18.php
+-- inc/plugins/mmybb18
+-- inc/languages/english/mmybb18.lang.php
 
 step 4:
 ================
-Upload following directories from the "mmybb18" directory to your web site:
--- mobile
+If you have other language(s) than English, please update your language file(s) as I do for "inc/languages/english/mmybb18.lang.php".
 
 step 5:
 ================
-OPEN
-----------------
-global.php
-
-FIND
-----------------
-// After all of that no theme? Load the board default
-if(empty($loadstyle))
-{
-	$loadstyle = "def='1'";
-}
-
-ADD BEFORE
-----------------
-include MYBB_ROOT . "/mobile/index.php";
-
-FIND
-----------------
-eval('$header = "'.$templates->get('header').'";');
-
-ADD BEFORE
-----------------
-if ( defined('MMYBB18') )
-{
-	eval('$index_panel = "'.$templates->get('index_panel').'";');
-
-	if ( MMYBB18 == 'Feature Phone' && !empty($lang->feature_phone_personal_header) )
-	{
-		eval('$header_personal = "'.$templates->get('header_personal').'";');
-	}
-	elseif ( MMYBB18 == 'jQuery-Mobile Smartphone' && !empty($lang->jquery_mobile_smartphone_personal_header) )
-	{
-		eval('$header_personal = "'.$templates->get('header_personal').'";');
-	}
-	elseif ( MMYBB18 == 'jQuery-Mobile Tablet' && !empty($lang->jquery_mobile_tablet_personal_header) )
-	{
-		eval('$header_personal = "'.$templates->get('header_personal').'";');
-	}
-
-	if ( MMYBB18 != 'jQuery-Mobile Tablet' && !empty($mybb->input['m-mode']) && $mybb->input['m-mode'] == 'option' )
-	{
-		eval('$header_option = "'.$templates->get('header_option').'";');
-	}
-}
-
-FIND
-----------------
-eval('$footer = "'.$templates->get('footer').'";');
-
-ADD BEFORE
-----------------
-if ( defined('MMYBB18') )
-{
-	if ( MMYBB18 == 'Feature Phone' && !empty($lang->feature_phone_personal_footer) )
-	{
-		eval('$footer_personal = "'.$templates->get('footer_personal').'";');
-	}
-	elseif ( MMYBB18 == 'jQuery-Mobile Smartphone' && !empty($lang->jquery_mobile_smartphone_personal_footer) )
-	{
-		eval('$footer_personal = "'.$templates->get('footer_personal').'";');
-	}
-	elseif ( MMYBB18 == 'jQuery-Mobile Tablet' && !empty($lang->jquery_mobile_tablet_personal_footer) )
-	{
-		eval('$footer_personal = "'.$templates->get('footer_personal').'";');
-	}
-}
+Go to MyBB 1.8 "Administration Control Panel", select "Plugins" in "Configuration" category of menu, click "Activate" for "Mobile MyBB 1.8".
 
 step 6:
 ================
-OPEN
-----------------
-inc/functions.php
-
-FIND
-----------------
-	if($error_handler->warnings)
-	{
-		$contents = str_replace("<body>", "<body>\n".$error_handler->show_warnings(), $contents);
-	}
-
-ADD AFTER
-----------------
-	if ( defined('MMYBB18') )
-	{
-		if ( $lang->settings['rtl'] == 1 )
-		{
-			$contents = str_replace('jquery.mobile-1.3.2.min.css', 'jquery.mobile-1.3.2.rtl.min.css', $contents);
-		}
-
-		$pattern = '#<title>\s*(.*)\s*</title>#i';
-		if ( preg_match($pattern, $contents, $matches) )
-		{
-			$pattern2 = '#(<h1>)\s*(.*)\s*(</h1>)#i';
-			$contents = preg_replace($pattern2, '$1' . $matches[1] . '$3', $contents);
-		}
-	}
+Set up a sub-domain, such as: "http://m.yoursite.com", which redirect to "http://yoursite.com/?m-redirection=mobile".
 
 step 7:
-================
-OPEN
-----------------
-inc/languages/english/global.lang.php
-
-FIND
-----------------
-$l['boardclosed_reason'] = 'These forums are currently closed for maintenance. Please check back later';
-
-ADD AFTER
-----------------
-$l['feature_phone_personal_footer'] = 'Powered by <a href="http://flexplat.com/">FlexPlat</a> and <a href="http://www.mybb.com/">MyBB</a>';
-$l['feature_phone_personal_header'] = '';
-$l['index'] = 'Index';
-$l['jquery_mobile_smartphone_personal_footer'] = '<h4>Powered by <a href="http://flexplat.com/" rel="external">FlexPlat</a>, <a href="http://www.mybb.com/" rel="external">MyBB</a> and <a href="http://jquerymobile.com/" rel="external">jQuery Mobile</a></h4>';
-$l['jquery_mobile_smartphone_personal_header'] = '';
-$l['jquery_mobile_tablet_personal_footer'] = '<h4>Powered by <a href="http://flexplat.com/" rel="external">FlexPlat</a>, <a href="http://www.mybb.com/" rel="external">MyBB</a> and <a href="http://jquerymobile.com/" rel="external">jQuery Mobile</a></h4>';
-$l['jquery_mobile_tablet_personal_header'] = '';
-$l['options'] = "Options";
-$l['switch_to_deskto_style'] = 'Switch to desktop style';
-
-step 8:
-================
-OPEN
-----------------
-index.php
-
-FIND
-----------------
-eval('$index = "'.$templates->get('index').'";');
-
-REPLACE WITH
-----------------
-if ( defined('MMYBB18') && MMYBB18 != 'jQuery-Mobile Tablet' && !empty($mybb->input['m-mode']) && $mybb->input['m-mode'] == 'option' )
-{
-	eval('$index = "'.$templates->get('index_option').'";');
-}
-else
-{
-	eval('$index = "'.$templates->get('index').'";');
-}
-
-step 9:
-================
-OPEN
-----------------
-member.php
-
-FIND
-----------------
-		$inline_errors = inline_error($errors);
-
-REPLACE WITH
-----------------
-		if ( defined('MMYBB18') )
-		{
-			$inline_errors = m_update_inline_error($errors);
-		}
-		else
-		{
-			$inline_errors = inline_error($errors);
-		}
-
-step 10:
-================
-Go to MyBB 1.8 "Administration Control Panel", select "Templates & Style", then choice "Import a Theme", import "Feature Phone", "jQuery-Mobile Smartphone" and "jQuery-Mobile Tablet" themes from following files in MMyBB18 package "themes" directory:
--- Feature Phone-theme.xml
--- jQuery-Mobile Smartphone-theme.xml
--- jQuery-Mobile Tablet-theme.xml
-
-step 11:
-================
-Set up a sub-domain, such as: "http://m.yoursite.com", which should redirect to "http://yoursite.com/?m-redirection=mobile".
-
-step 12:
 ================
 End users can now get mobile-friendly style of your MyBB 1.8 from their mobile web browsers through "http://m.yoursite.com".

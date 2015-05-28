@@ -1,7 +1,7 @@
 Mobile MyBB 1.8 Readme
 ################
-version: 0.0.0
-last update: Thur., Apr. 09, 2015
+version: 0.1.0
+last update: Sun., May 24, 2015
 
 
 Description
@@ -20,7 +20,7 @@ None.
 
 Open Issue
 ++++++++++++++++
-None.
+-- Do NOT support reCAPTCHA at this time.
 
 
 Infrastructure
@@ -37,17 +37,13 @@ Configuration
 ++++++++++++++++
 Personalize Page Header and Footer
 ================
-The following variables content within "http://yoursite.com/inc/languages/english/global.php" will be displayed on the header of each mobile-friendly web page.  You can update these variables to show your web site logo and/or advertisement.
--- $l['feature_phone_personal_header']
--- $l['jquery_mobile_smartphone_personal_header']
--- $l['jquery_mobile_tablet_personal_header']
+The following variable content within "inc/languages/english/mmybb18.lang.php" will be displayed on the header of each mobile-friendly web page.  You can update this variable to show your web site logo and/or advertisement.
+-- $l['personal_header']
 
-The following variables content within "http://yoursite.com/language/en/common.php" will be displayed on the footer of mobile-friendly homepage.  You can update these variables to show your web site information.
--- $l['feature_phone_personal_footer']
--- $l['jquery_mobile_smartphone_personal_footer']
--- $l['jquery_mobile_tablet_personal_footer']
+The following variable content within "inc/languages/english/mmybb18.lang.php" will be displayed on the footer of mobile-friendly homepage.  You can update this variable to show your web site information.
+-- $l['personal_footer']
 
-If you have other language(s) than English, please update your language file(s) as I do for "http://yoursite.com/inc/languages/english/global.php".
+If you have other language(s) than English, please update your language file(s) as I do for "inc/languages/english/mmybb18.lang.php".
 
 
 Frequent Ask Question
@@ -59,6 +55,8 @@ Since I often have to update this section after I release the package, so I prov
 
 History
 ++++++++++++++++
+version 0.1.0 (Sun., May 24, 2015)
+-- rewrite based on plugin style
 
 version 0.0.0 (Thur., Apr. 09, 2015)
 -- primary development

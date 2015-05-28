@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<theme name="jQuery-Mobile Tablet" version="1804">
+<theme name="Mobile MyBB 1.8" version="1804">
 	<properties>
-		<templateset><![CDATA[4]]></templateset>
+		<templateset><![CDATA[2]]></templateset>
 		<editortheme><![CDATA[mybb.css]]></editortheme>
 		<imgdir><![CDATA[images]]></imgdir>
 		<logo><![CDATA[images/logo.png]]></logo>
@@ -13,6 +13,19 @@
 	<stylesheets>
 	</stylesheets>
 	<templates>
+		<template name="announcement" version="1804"><![CDATA[<html>
+<head>
+<title>{$lang->forum_announcement}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+<li data-role="list-divider">{$lang->forum_announcement}</li>
+{$announcement}
+</ul>
+{$footer}
+</body>
+</html>]]></template>
 		<template name="error" version="1804"><![CDATA[<html>
 <head>
 <title>{$title}</title>
@@ -30,7 +43,7 @@
 </div>]]></template>
 		<template name="footer_personal" version="1804"><![CDATA[</div>
 <div data-role="footer" data-theme="c">
-{$lang->jquery_mobile_tablet_personal_footer}]]></template>
+{$lang->personal_footer}]]></template>
 		<template name="forumbit_depth1_cat" version="1804"><![CDATA[<li data-role="list-divider">{$forum['name']}</li>
 {$sub_forums}]]></template>
 		<template name="forumbit_depth2_forum" version="1804"><![CDATA[<li>
@@ -72,7 +85,7 @@
 		<template name="forumdisplay_thread" version="1804"><![CDATA[<li>
 <a href="{$thread['threadlink']}" rel="external">
 <h3>{$thread['subject']}</h3>
-<p>{$thread['threadusername']}</p>
+<p>{$thread['threadusername']} &gt; {$lastpostdate}</p>
 <span class="ui-li-count">{$thread['replies']} / {$thread['views']}</span>
 </a>
 <a href="{$thread['lastpostlink']}" rel="external" data-transition="slideup"></a>
@@ -84,9 +97,8 @@
 {$multipage}]]></template>
 		<template name="forumdisplay_threads_sep" version="1804"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->normal_threads}</li>]]></template>
 		<template name="header" version="1804"><![CDATA[<div data-role="page">
-{$index_panel}
 <div data-role="header" data-position="fixed">
-<a href="#m-panel" data-icon="bars" data-shadow="false" data-iconshadow="false">{$lang->options}</a>
+<a href="{$mybb->settings['bburl']}/index.php?m-mode=option" data-rel="dialog" data-icon="bars" data-transition="pop">{$lang->options}</a>
 <h1>{$mybb->settings['bbname']}</h1>
 </div>
 <div data-role="content">
@@ -98,14 +110,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="{$mybb->settings['bburl']}/mobile/themes/jquery/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-<script src="{$mybb->settings['bburl']}/mobile/themes/jquery/jquery-1.9.1.min.js"></script>
-<script src="{$mybb->settings['bburl']}/mobile/themes/jquery/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<link rel="stylesheet" href="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/jquery-1.9.1.min.js"></script>
+<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <style type="text/css">
 img { max-width: 100%; height: auto; }
 </style>]]></template>
+		<template name="headerinclude_showthread" version="1804"><![CDATA[<link rel="alternate" type="application/rss+xml" title="{$lang->latest_threads} (RSS 2.0)" href="{$mybb->settings['bburl']}/syndication.php" />
+<link rel="alternate" type="application/atom+xml" title="{$lang->latest_threads} (Atom 1.0)" href="{$mybb->settings['bburl']}/syndication.php?type=atom1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/jquery-1.9.1.min.js"></script>
+<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<style type="text/css">
+img { max-width: 100%; height: auto; }
+</style>
+<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/scroll_to_hash.js"></script>]]></template>
+		<template name="header_option" version="1804"><![CDATA[<div data-role="page">
+<div data-role="header" data-position="fixed">
+<h1>{$lang->options}</h1>
+</div>
+<div data-role="content">
+<ul data-role="listview">]]></template>
 		<template name="header_personal" version="1804"><![CDATA[<li>
-{$lang->jquery_mobile_tablet_personal_header}
+{$lang->personal_header}
 </li>]]></template>
 		<template name="header_welcomeblock_guest" version="1804"><![CDATA[<li>
 <a href="{$mybb->settings['bburl']}/member.php?action=login" rel="external">{$lang->welcome_login}</a>
@@ -127,15 +157,22 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="index_panel" version="1804"><![CDATA[<div data-role="panel" id="m-panel" data-theme="c">
-<ul data-role="listview" data-theme="d">
-<li data-role="list-divider">{$lang->options}</li>
-{$welcomeblock}
+		<template name="index_option" version="1804"><![CDATA[<html>
+<head>
+<title>{$lang->options}</title>
+{$headerinclude}
+</head>
+<body>
+{$header_option}
+{$index_panel}
+</ul>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="index_panel" version="1804"><![CDATA[{$welcomeblock}
 <li>
 <a href="{$mybb->settings['bburl']}/index.php?m-redirection=desktop" rel="external">{$lang->switch_to_deskto_style}</a>
-</li>
-</ul>
-</div>]]></template>
+</li>]]></template>
 		<template name="member_loggedin_notice" version="1804"><![CDATA[<li>{$lang->already_logged_in}</li>]]></template>
 		<template name="member_login" version="1804"><![CDATA[<html>
 <head>
@@ -151,11 +188,11 @@ img { max-width: 100%; height: auto; }
 <form action="member.php" method="post">
 <div data-role="fieldcontain">
 <label for="username">{$lang->username}</label>
-<input type="text" name="username" id="username" size="25" value="{$username}" placeholder="{$lang->username}" />
+<input type="text" name="username" id="username" size="25" value="{$username}" />
 </div>
 <div data-role="fieldcontain">
 <label for="password">{$lang->password}<br />{$lang->pw_note}</label>
-<input type="password" name="password" id="password" size="25" value="{$password}" placeholder="{$lang->password}" />
+<input type="password" name="password" id="password" size="25" value="{$password}" />
 </div>
 <div data-role="fieldcontain">
 <fieldset data-role="controlgroup">
@@ -191,7 +228,7 @@ img { max-width: 100%; height: auto; }
 <form action="member.php" method="post">
 <div data-role="fieldcontain">
 <label for="email">{$lang->email_address}</label>
-<input type="text" name="email" id="email" placeholder="{$lang->email_address}" />
+<input type="text" name="email" id="email" />
 </div>
 <fieldset data-role="controlgroup">
 <input type="submit" value="{$lang->request_user_pass}" data-theme="a" />
@@ -240,11 +277,26 @@ img { max-width: 100%; height: auto; }
 		<template name="nav_bit_active" version="1804"><![CDATA[<li>
 <a href="{$navbit['url']}" rel="external">{$navbit['name']}</a>
 </li>]]></template>
-		<template name="postbit" version="1804"><![CDATA[<li>
+		<template name="postbit" version="1804"><![CDATA[]]></template>
+		<template name="postbit_ignored" version="1804"><![CDATA[<li>
+<div id="pid{$post['pid']}">
+<div data-role="collapsible">
+<h4>{$ignored_message}</h4>
 <h3>{$post['subject']}</h3>
 <p>{$post['username']} &gt; {$post['postdate']}</p>
 <div>
 {$post['message']}
+</div>
+</div>
+</div>
+</li>]]></template>
+		<template name="postbit_normal" version="1804"><![CDATA[<li>
+<div id="pid{$post['pid']}">
+<h3>{$post['subject']}</h3>
+<p>{$post['username']} &gt; {$post['postdate']}</p>
+<div>
+{$post['message']}
+</div>
 </div>
 </li>]]></template>
 		<template name="post_captcha" version="1804"><![CDATA[<div data-role="fieldcontain">
@@ -257,7 +309,7 @@ img { max-width: 100%; height: auto; }
 </div>
 <div data-role="fieldcontain">
 <label for="imagestring">{$lang->verification_note}<br />{$lang->verification_subnote}</label>
-<input type="text" name="imagestring" value="" id="imagestring" size="16" placeholder="{$lang->image_verification}" />
+<input type="text" name="imagestring" value="" id="imagestring" size="16" />
 </div>
 <input type="hidden" name="imagehash" value="{$imagehash}" id="imagehash" />]]></template>
 		<template name="redirect" version="1804"><![CDATA[<html>
@@ -282,7 +334,7 @@ img { max-width: 100%; height: auto; }
 		<template name="showthread" version="1804"><![CDATA[<html>
 <head>
 <title>{$thread['subject']}</title>
-{$headerinclude}
+{$headerinclude_showthread}
 </head>
 <body>
 {$header}
