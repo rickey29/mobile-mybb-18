@@ -27,7 +27,7 @@ Go to MyBB 1.8 "Administration Control Panel", select "Plugins" in "Configuratio
 
 step 6:
 ================
-Set up a sub-domain, such as: "http://m.yoursite.com", which redirect to "http://yoursite.com/?m-redirection=mobile".
+Set up a sub-domain, such as: "http://m.yoursite.com", which redirects to "http://yoursite.com/?m-redirection=mobile".
 
 step 7:
 ================

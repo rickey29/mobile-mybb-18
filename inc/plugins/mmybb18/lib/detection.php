@@ -2,7 +2,7 @@
 /*
 	project: Mobile MyBB 1.8 (MMyBB18)
 	file:    MYBB_ROOT/inc/plugins/mmybb18/lib/detection.php
-	version: 0.1.0
+	version: 1.0.0
 	author:  Rickey Gu
 	web:     http://flexplat.com
 	email:   rickey29@gmail.com
@@ -25,6 +25,13 @@ function m_get_device($data)
 		// Kindle Fire
 		'Kindle Fire' => 'tablet',
 		'Kindle/' => 'tablet',
+		'KFAPWI' => 'tablet',
+
+		// Nexus
+		'Nexus 4' => 'smartphone',
+		'Nexus 5' => 'smartphone',
+		'Nexus 7' => 'tablet',
+		'Nexus 10' => 'tablet',
 
 		// Android
 		'Android*Mobile' => 'smartphone',
@@ -47,6 +54,7 @@ function m_get_device($data)
 
 		// Internet Explorer
 		'MSIE ' => 'desktop',
+		'Windows NT' => 'desktop',
 
 		// Opera Mobile
 		'Opera Mobi*Version/' => 'smartphone',
@@ -66,6 +74,7 @@ function m_get_device($data)
 
 		// BlackBerry
 		'BlackBerry*AppleWebKit*Version/' => 'smartphone',
+		'BB*AppleWebKit*Version' => 'smartphone',
 		'PlayBook*AppleWebKit' => 'tablet',
 		'BlackBerry*/*MIDP' => 'feature-phone',
 

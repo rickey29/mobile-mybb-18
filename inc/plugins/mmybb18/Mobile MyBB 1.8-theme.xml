@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<theme name="Mobile MyBB 1.8" version="1804">
+<theme name="Mobile MyBB 1.8" version="1805">
 	<properties>
 		<templateset><![CDATA[2]]></templateset>
 		<editortheme><![CDATA[mybb.css]]></editortheme>
@@ -13,7 +13,7 @@
 	<stylesheets>
 	</stylesheets>
 	<templates>
-		<template name="announcement" version="1804"><![CDATA[<html>
+		<template name="announcement" version="1805"><![CDATA[<html>
 <head>
 <title>{$lang->forum_announcement}</title>
 {$headerinclude}
@@ -26,7 +26,8 @@
 {$footer}
 </body>
 </html>]]></template>
-		<template name="error" version="1804"><![CDATA[<html>
+		<template name="changeuserbox" version="1805"><![CDATA[]]></template>
+		<template name="error" version="1805"><![CDATA[<html>
 <head>
 <title>{$title}</title>
 {$headerinclude}
@@ -34,19 +35,68 @@
 <body>
 {$header}
 <li data-role="list-divider">{$title}</li>
-<li>{$error}</li>
+<li>
+{$error}
+</li>
 </ul>
 {$footer}
 </body>
 </html>]]></template>
-		<template name="footer" version="1804"><![CDATA[</div>
+		<template name="error_nopermission" version="1805"><![CDATA[{$lang->error_nopermission_guest_1}
+<br />
+{$lang->error_nopermission_guest_2}
+<br />
+{$lang->error_nopermission_guest_3}
+<br />
+{$lang->error_nopermission_guest_4}
+<br />
+{$lang->error_nopermission_guest_5}
+</li>
+<li data-role="list-divider">{$lang->login}</li>
+<li>
+<form action="member.php" method="post">
+<input type="hidden" name="action" value="do_login" />
+<input type="hidden" name="url" value="{$redirect_url}" />
+<div data-role="fieldcontain">
+<label for="username">{$lang_username}</label>
+<input type="text" name="username" id="username" />
+</div>
+<div data-role="fieldcontain">
+<label for="password">{$lang->password}</label>
+<input type="password" name="password" id="password" />
+</div>
+<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<input type="submit" name="submit" value="{$lang->login}" data-theme="a" />
+</fieldset>
+</div>
+</form>
+</li>
+<li>
+<a href="member.php?action=register" rel="external">{$lang->need_reg}</a>
+</li>
+<li>
+<a href="member.php?action=lostpw" rel="external">{$lang->forgot_password}</a>]]></template>
+		<template name="error_nopermission_loggedin" version="1805"><![CDATA[{$lang->error_nopermission_user_1}
+<br />
+{$lang->error_nopermission_user_2}
+<br />
+{$lang->error_nopermission_user_3}
+<br />
+{$lang->error_nopermission_user_4}
+<br />
+{$lang->error_nopermission_user_5}
+<br />
+{$lang->error_nopermission_user_username}]]></template>
+		<template name="footer" version="1805"><![CDATA[</div>
 </div>]]></template>
-		<template name="footer_personal" version="1804"><![CDATA[</div>
+		<template name="footer_personal" version="1805"><![CDATA[</div>
 <div data-role="footer" data-theme="c">
 {$lang->personal_footer}]]></template>
-		<template name="forumbit_depth1_cat" version="1804"><![CDATA[<li data-role="list-divider">{$forum['name']}</li>
+		<template name="forumbit_depth1_cat" version="1805"><![CDATA[<li data-role="list-divider">{$forum['name']}</li>
 {$sub_forums}]]></template>
-		<template name="forumbit_depth2_forum" version="1804"><![CDATA[<li>
+		<template name="forumbit_depth1_forum_lastpost" version="1805"><![CDATA[<a href="{$lastpost_link}" rel="external" data-transition="slideup"></a>]]></template>
+		<template name="forumbit_depth2_cat" version="1805"><![CDATA[<li>
 <a href="{$forum_url}" rel="external">
 <h3>{$forum['name']}</h3>
 <p>{$forum['description']}</p>
@@ -54,10 +104,18 @@
 </a>
 {$lastpost}
 </li>]]></template>
-		<template name="forumbit_depth2_forum_lastpost" version="1804"><![CDATA[<a href="{$lastpost_link}" rel="external" data-transition="slideup"></a>]]></template>
-		<template name="forumbit_depth2_forum_lastpost_hidden" version="1804"><![CDATA[]]></template>
-		<template name="forumbit_depth2_forum_lastpost_never" version="1804"><![CDATA[]]></template>
-		<template name="forumdisplay" version="1804"><![CDATA[<html>
+		<template name="forumbit_depth2_forum" version="1805"><![CDATA[<li>
+<a href="{$forum_url}" rel="external">
+<h3>{$forum['name']}</h3>
+<p>{$forum['description']}</p>
+<span class="ui-li-count">{$threads} / {$posts}</span>
+</a>
+{$lastpost}
+</li>]]></template>
+		<template name="forumbit_depth2_forum_lastpost" version="1805"><![CDATA[<a href="{$lastpost_link}" rel="external" data-transition="slideup"></a>]]></template>
+		<template name="forumbit_depth2_forum_lastpost_hidden" version="1805"><![CDATA[]]></template>
+		<template name="forumbit_depth2_forum_lastpost_never" version="1805"><![CDATA[]]></template>
+		<template name="forumdisplay" version="1805"><![CDATA[<html>
 <head>
 <title>{$foruminfo['name']}</title>
 {$headerinclude}
@@ -70,19 +128,47 @@
 {$footer}
 </body>
 </html>]]></template>
-		<template name="forumdisplay_announcements" version="1804"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->forum_announcements}</li>
+		<template name="forumdisplay_announcements" version="1805"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->forum_announcements}</li>
 {$announcements}]]></template>
-		<template name="forumdisplay_announcements_announcement" version="1804"><![CDATA[<li>
+		<template name="forumdisplay_announcements_announcement" version="1805"><![CDATA[<li>
 <a href="{$announcement['announcementlink']}" rel="external">
 <h3>{$announcement['subject']}</h3>
 <p>{$announcement['username']} &gt; {$postdate}</p>
 </a>
 </li>]]></template>
-		<template name="forumdisplay_nothreads" version="1804"><![CDATA[<li>{$lang->nothreads}</li>]]></template>
-		<template name="forumdisplay_sticky_sep" version="1804"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->sticky_threads}</li>]]></template>
-		<template name="forumdisplay_subforums" version="1804"><![CDATA[<li data-role="list-divider">{$lang->sub_forums_in}</li>
+		<template name="forumdisplay_newthread" version="1805"><![CDATA[<a href="newthread.php?fid={$fid}" rel="external" data-role="button" data-inline="true" data-theme="b">{$lang->post_thread}</a>]]></template>
+		<template name="forumdisplay_nothreads" version="1805"><![CDATA[<li>{$lang->nothreads}</li>]]></template>
+		<template name="forumdisplay_password" version="1805"><![CDATA[<html>
+<head>
+<title>{$lang->password_required}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+<li data-role="list-divider">{$lang->password_required}</li>
+{$pwnote}
+<li>
+<form action="{$_SERVER['REQUEST_URI']}" method="post">
+<div data-role="fieldcontain">
+<label for="pwverify">{$lang->enter_password_below}<br />{$lang->forum_password_note}</label>
+<input type="password" name="pwverify" id="pwverify" size="50" value="" />
+</div>
+<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<input type="submit" name="submit" value="{$lang->verify_forum_password}" data-theme="a" />
+</fieldset>
+</div>
+</form>
+</li>
+</ul>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="forumdisplay_password_wrongpass" version="1805"><![CDATA[<li data-theme="e">{$lang->wrong_forum_password}</li>]]></template>
+		<template name="forumdisplay_sticky_sep" version="1805"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->sticky_threads}</li>]]></template>
+		<template name="forumdisplay_subforums" version="1805"><![CDATA[<li data-role="list-divider">{$lang->sub_forums_in}</li>
 {$forums}]]></template>
-		<template name="forumdisplay_thread" version="1804"><![CDATA[<li>
+		<template name="forumdisplay_thread" version="1805"><![CDATA[<li>
 <a href="{$thread['threadlink']}" rel="external">
 <h3>{$thread['subject']}</h3>
 <p>{$thread['threadusername']} &gt; {$lastpostdate}</p>
@@ -90,13 +176,19 @@
 </a>
 <a href="{$thread['lastpostlink']}" rel="external" data-transition="slideup"></a>
 </li>]]></template>
-		<template name="forumdisplay_threadlist" version="1804"><![CDATA[<li data-role="list-divider">{$foruminfo['name']}</li>
+		<template name="forumdisplay_threadlist" version="1805"><![CDATA[<li>
+<div>
+{$newthread}
+</div>
+</li>
+<li data-role="list-divider">{$foruminfo['name']}</li>
 {$announcementlist}
 {$threads}
 </ul>
 {$multipage}]]></template>
-		<template name="forumdisplay_threads_sep" version="1804"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->normal_threads}</li>]]></template>
-		<template name="header" version="1804"><![CDATA[<div data-role="page">
+		<template name="forumdisplay_threads_sep" version="1805"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->normal_threads}</li>]]></template>
+		<template name="global_moderation_notice" version="1805"><![CDATA[<li>{$moderation_text}</li>]]></template>
+		<template name="header" version="1805"><![CDATA[<div data-role="page">
 <div data-role="header" data-position="fixed">
 <a href="{$mybb->settings['bburl']}/index.php?m-mode=option" data-rel="dialog" data-icon="bars" data-transition="pop">{$lang->options}</a>
 <h1>{$mybb->settings['bbname']}</h1>
@@ -105,7 +197,7 @@
 <ul data-role="listview">
 {$header_personal}
 <navigation>]]></template>
-		<template name="headerinclude" version="1804"><![CDATA[<link rel="alternate" type="application/rss+xml" title="{$lang->latest_threads} (RSS 2.0)" href="{$mybb->settings['bburl']}/syndication.php" />
+		<template name="headerinclude" version="1805"><![CDATA[<link rel="alternate" type="application/rss+xml" title="{$lang->latest_threads} (RSS 2.0)" href="{$mybb->settings['bburl']}/syndication.php" />
 <link rel="alternate" type="application/atom+xml" title="{$lang->latest_threads} (Atom 1.0)" href="{$mybb->settings['bburl']}/syndication.php?type=atom1.0" />
 <meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
@@ -116,7 +208,7 @@
 <style type="text/css">
 img { max-width: 100%; height: auto; }
 </style>]]></template>
-		<template name="headerinclude_showthread" version="1804"><![CDATA[<link rel="alternate" type="application/rss+xml" title="{$lang->latest_threads} (RSS 2.0)" href="{$mybb->settings['bburl']}/syndication.php" />
+		<template name="headerinclude_showthread" version="1805"><![CDATA[<link rel="alternate" type="application/rss+xml" title="{$lang->latest_threads} (RSS 2.0)" href="{$mybb->settings['bburl']}/syndication.php" />
 <link rel="alternate" type="application/atom+xml" title="{$lang->latest_threads} (Atom 1.0)" href="{$mybb->settings['bburl']}/syndication.php?type=atom1.0" />
 <meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
@@ -128,23 +220,26 @@ img { max-width: 100%; height: auto; }
 img { max-width: 100%; height: auto; }
 </style>
 <script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/scroll_to_hash.js"></script>]]></template>
-		<template name="header_option" version="1804"><![CDATA[<div data-role="page">
+		<template name="header_option" version="1805"><![CDATA[<div data-role="page">
 <div data-role="header" data-position="fixed">
 <h1>{$lang->options}</h1>
 </div>
 <div data-role="content">
 <ul data-role="listview">]]></template>
-		<template name="header_personal" version="1804"><![CDATA[<li>
+		<template name="header_personal" version="1805"><![CDATA[<li>
 {$lang->personal_header}
 </li>]]></template>
-		<template name="header_welcomeblock_guest" version="1804"><![CDATA[<li>
+		<template name="header_welcomeblock_guest" version="1805"><![CDATA[<li>
 <a href="{$mybb->settings['bburl']}/member.php?action=login" rel="external">{$lang->welcome_login}</a>
+</li>
+<li>
+<a href="{$mybb->settings['bburl']}/member.php?action=register" rel="external">{$lang->welcome_register}</a>
 </li>]]></template>
-		<template name="header_welcomeblock_member" version="1804"><![CDATA[<li>
+		<template name="header_welcomeblock_member" version="1805"><![CDATA[<li>
 <a href="{$mybb->settings['bburl']}/member.php?action=logout&amp;logoutkey={$mybb->user['logoutkey']}" rel="external">{$lang->welcome_logout}</a>
 </li>]]></template>
-		<template name="htmldoctype" version="1804"><![CDATA[<!DOCTYPE html>]]></template>
-		<template name="index" version="1804"><![CDATA[<html>
+		<template name="htmldoctype" version="1805"><![CDATA[<!DOCTYPE html>]]></template>
+		<template name="index" version="1805"><![CDATA[<html>
 <head>
 <title>{$mybb->settings['bbname']}</title>
 {$headerinclude}
@@ -157,7 +252,7 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="index_option" version="1804"><![CDATA[<html>
+		<template name="index_option" version="1805"><![CDATA[<html>
 <head>
 <title>{$lang->options}</title>
 {$headerinclude}
@@ -169,12 +264,16 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="index_panel" version="1804"><![CDATA[{$welcomeblock}
+		<template name="index_panel" version="1805"><![CDATA[{$welcomeblock}
 <li>
 <a href="{$mybb->settings['bburl']}/index.php?m-redirection=desktop" rel="external">{$lang->switch_to_deskto_style}</a>
 </li>]]></template>
-		<template name="member_loggedin_notice" version="1804"><![CDATA[<li>{$lang->already_logged_in}</li>]]></template>
-		<template name="member_login" version="1804"><![CDATA[<html>
+		<template name="loginbox" version="1805"><![CDATA[<div data-role="fieldcontain">
+<label for="username">{$lang->username}</label>
+<input type="text" name="username" id="username" size="30" value="{$username}" />
+</div>]]></template>
+		<template name="member_loggedin_notice" version="1805"><![CDATA[<li>{$lang->already_logged_in}</li>]]></template>
+		<template name="member_login" version="1805"><![CDATA[<html>
 <head>
 <title>{$lang->login}</title>
 {$headerinclude}
@@ -202,9 +301,11 @@ img { max-width: 100%; height: auto; }
 </fieldset>
 </div>
 {$captcha}
+<div data-role="fieldcontain">
 <fieldset data-role="controlgroup">
 <input type="submit" name="submit" value="{$lang->login}" data-theme="a" />
 </fieldset>
+</div>
 <input type="hidden" name="action" value="do_login" />
 <input type="hidden" name="url" value="{$redirect_url}" />
 </form>
@@ -216,7 +317,7 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="member_lostpw" version="1804"><![CDATA[<html>
+		<template name="member_lostpw" version="1805"><![CDATA[<html>
 <head>
 <title>{$lang->lost_pw}</title>
 {$headerinclude}
@@ -230,9 +331,11 @@ img { max-width: 100%; height: auto; }
 <label for="email">{$lang->email_address}</label>
 <input type="text" name="email" id="email" />
 </div>
+<div data-role="fieldcontain">
 <fieldset data-role="controlgroup">
 <input type="submit" value="{$lang->request_user_pass}" data-theme="a" />
 </fieldset>
+</div>
 <input type="hidden" name="action" value="do_lostpw" />
 </form>
 </li>
@@ -240,7 +343,310 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="multipage" version="1804"><![CDATA[</div>
+		<template name="member_profile" version="1805"><![CDATA[<html>
+<head>
+<title>{$lang->profile}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+<li data-role="list-divider">{$memprofile['username']} ({$usertitle})</li>
+<li>
+{$lang->registration_date} {$memregdate}
+</li>
+<li>
+{$lang->date_of_birth} {$membday} {$membdayage}
+</li>
+<li>
+{$lang->local_time} {$localtime}
+</li>
+<li>
+{$lang->postbit_status} {$online_status}
+</li>
+{$awaybit}
+{$bannedbit}
+<li data-role="list-divider">{$lang->users_forum_info}</li>
+<li>
+{$lang->joined} {$memregdate}
+</li>
+<li>
+{$lang->lastvisit} {$memlastvisitdate}
+</li>
+<li>
+<div>
+{$lang->total_posts} {$memprofile['postnum']} ({$lang->ppd_percent_total})<br />(<a href="search.php?action=finduser&amp;uid={$uid}" rel="external">{$lang->find_posts}</a>)
+</div>
+</li>
+<li>
+<div>
+{$lang->total_threads} {$memprofile['threadnum']} ({$lang->tpd_percent_total})<br />(<a href="search.php?action=finduserthreads&amp;uid={$uid}" rel="external">{$lang->find_threads}</a>)
+</div>
+</li>
+<li>
+{$lang->timeonline} {$timeonline}
+</li>
+{$referrals}
+{$reputation}
+{$warning_level}
+{$contact_details}
+{$profilefields}
+{$signature}
+{$buddy_options}
+{$ignore_options}
+</ul>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="member_profile_addremove" version="1805"><![CDATA[<li>
+<a href="{$add_remove_options['url']}" rel="external">{$add_remove_options['lang']}</a>
+</li>]]></template>
+		<template name="member_profile_away" version="1805"><![CDATA[<li data-role="list-divider">{$lang->away_note}</li>
+<li>
+{$lang->away_reason} {$awayreason}
+</li>
+<li>
+{$lang->away_since} {$awaydate} &mdash; {$lang->away_returns} {$returndate}
+</li>]]></template>
+		<template name="member_profile_banned" version="1805"><![CDATA[<li data-role="list-divider">{$lang->ban_note}</li>
+<li>
+{$lang->banned_warning2}: {$memban['reason']}
+</li>
+<li>
+<div>
+{$lang->ban_by}: {$memban['adminuser']} &mdash; {$lang->ban_length}: {$banlength} {$timeremaining}
+</div>
+</li>]]></template>
+		<template name="member_profile_contact_details" version="1805"><![CDATA[<li data-role="list-divider">{$lang->users_contact_details}</li>
+{$website}
+{$sendemail}
+{$sendpm}
+{$contact_fields['icq']}
+{$contact_fields['aim']}
+{$contact_fields['yahoo']}
+{$contact_fields['skype']}
+{$contact_fields['google']}]]></template>
+		<template name="member_profile_contact_fields_aim" version="1805"><![CDATA[<li>
+{$lang->aim_screenname} {$memprofile['aim']}
+</li>]]></template>
+		<template name="member_profile_contact_fields_google" version="1805"><![CDATA[<li>
+{$lang->google_id} {$memprofile['google']}
+</li>]]></template>
+		<template name="member_profile_contact_fields_icq" version="1805"><![CDATA[<li>
+{$lang->icq_number} {$memprofile['icq']}
+</li>]]></template>
+		<template name="member_profile_contact_fields_skype" version="1805"><![CDATA[<li>
+{$lang->skype_id} {$memprofile['skype']}
+</li>]]></template>
+		<template name="member_profile_contact_fields_yahoo" version="1805"><![CDATA[<li>
+{$lang->yahoo_id} {$memprofile['yahoo']}
+</li>]]></template>
+		<template name="member_profile_customfields" version="1805"><![CDATA[<li data-role="list-divider">{$lang->users_additional_info}</li>
+{$customfields}]]></template>
+		<template name="member_profile_customfields_field" version="1805"><![CDATA[<li>
+{$customfield['name']}: {$customfieldval}
+</li>]]></template>
+		<template name="member_profile_email" version="1805"><![CDATA[<li>
+<div>
+{$lang->email} <a href="member.php?action=emailuser&amp;uid={$memprofile['uid']}" rel="external">{$lang->send_user_email}</a>
+</div>
+</li>]]></template>
+		<template name="member_profile_offline" version="1805"><![CDATA[{$lang->postbit_status_offline}]]></template>
+		<template name="member_profile_online" version="1805"><![CDATA[{$lang->postbit_status_online}]]></template>
+		<template name="member_profile_pm" version="1805"><![CDATA[<li>
+<div>
+{$lang->pm} <a href="private.php?action=send&amp;uid={$memprofile['uid']}" rel="external">{$lang->send_pm}</a>
+</div>
+</li>]]></template>
+		<template name="member_profile_referrals" version="1805"><![CDATA[<li>
+{$lang->members_referred} {$memprofile['referrals']}
+</li>]]></template>
+		<template name="member_profile_reputation" version="1805"><![CDATA[<li>
+<div>
+{$lang->reputation} {$memprofile['reputation']} [<a href="reputation.php?uid={$memprofile['uid']}" rel="external">{$lang->reputation_details}</a>]
+</div>
+</li>]]></template>
+		<template name="member_profile_signature" version="1805"><![CDATA[<li data-role="list-divider">{$lang->users_signature}</li>
+<li>
+<div>
+{$memprofile['signature']}
+</div>
+</li>]]></template>
+		<template name="member_profile_warn" version="1805"><![CDATA[[<a href="warnings.php?action=warn&amp;uid={$memprofile['uid']}" rel="external">{$lang->warn}</a>]]]></template>
+		<template name="member_profile_warninglevel" version="1805"><![CDATA[<li>
+<div>
+{$lang->warning_level} <a href="{$warning_link}" rel="external">{$warning_level}</a> {$warn_user}
+</div>
+</li>]]></template>
+		<template name="member_profile_website" version="1805"><![CDATA[<li>
+<div>
+{$lang->homepage} <a href="{$memprofile['website']}" rel="external">{$memprofile['website']}</a>
+</div>
+</li>]]></template>
+		<template name="member_register" version="1805"><![CDATA[<html>
+<head>
+<title>{$lang->registration}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+<li data-role="list-divider">{$lang->registration}</li>
+{$regerrors}
+<li>
+<form action="member.php" method="post" id="registration_form">
+<input type="hidden" name="regcheck1" value="" />
+<input type="hidden" name="regcheck2" value="true" />
+<legend>{$lang->account_details}</legend>
+<div data-role="fieldcontain">
+<label for="username">{$lang->username}</label>
+<input type="text" name="username" id="username" value="{$username}" />
+</div>
+{$passboxes}
+<div data-role="fieldcontain">
+<label for="email">{$lang->email}</label>
+<input type="text" name="email" id="email" maxlength="50" value="{$email}" />
+</div>
+<div data-role="fieldcontain">
+<label for="email2">{$lang->confirm_email}</label>
+<input type="text" name="email2" id="email2" maxlength="50" value="{$email2}" />
+</div>
+{$regimage}
+{$questionbox}
+<legend>{$lang->account_prefs}</legend>
+<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<legend></legend>
+<input type="checkbox" name="allownotices" id="allownotices" value="1" {$allownoticescheck} />
+<label for="allownotices">{$lang->allow_notices}</label>
+<input type="checkbox" name="hideemail" id="hideemail" value="1" {$hideemailcheck} />
+<label for="hideemail">{$lang->hide_email}</label>
+<input type="checkbox" name="receivepms" id="receivepms" value="1" {$receivepmscheck} />
+<label for="receivepms">{$lang->receive_pms}</label>
+<input type="checkbox" name="pmnotice" id="pmnotice" value="1"{$pmnoticecheck} />
+<label for="pmnotice">{$lang->pm_notice}</label>
+<input type="checkbox" name="pmnotify" id="pmnotify" value="1" {$pmnotifycheck} />
+<label for="pmnotify">{$lang->email_notify_newpm}</label>
+<input type="checkbox" name="invisible" id="invisible" value="1" {$invisiblecheck} />
+<label for="invisible">{$lang->invisible_mode}</label>
+</fieldset>
+</div>
+<div data-role="fieldcontain">
+<label for="subscriptionmethod" class="select">{$lang->subscription_method}</label>
+<select name="subscriptionmethod" id="subscriptionmethod" data-native-menu="false">
+<option value="0" {$no_auto_subscribe_selected}>{$lang->no_auto_subscribe}</option>
+<option value="1" {$no_subscribe_selected}>{$lang->no_subscribe}</option>
+<option value="2" {$instant_email_subscribe_selected}>{$lang->instant_email_subscribe}</option>
+<option value="3" {$instant_pm_subscribe_selected}>{$lang->instant_pm_subscribe}</option>
+</select>
+</div>
+<legend>{$lang->time_offset}</legend>
+<div data-role="fieldcontain">
+<label for="timezoneoffset" class="select">{$lang->time_offset_desc}</label>
+{$tzselect}
+</div>
+<div data-role="fieldcontain">
+<label for="dstcorrection" class="select">{$lang->dst_correction}</label>
+<select name="dstcorrection" id="dstcorrection" data-native-menu="false">
+<option value="2" {$dst_auto_selected}>{$lang->dst_correction_auto}</option>
+<option value="1" {$dst_enabled_selected}>{$lang->dst_correction_enabled}</option>
+<option value="0" {$dst_disabled_selected}>{$lang->dst_correction_disabled}</option>
+</select>
+</div>
+{$boardlanguage}
+<input type="hidden" name="regtime" value="{$time}" />
+<input type="hidden" name="step" value="registration" />
+<input type="hidden" name="action" value="do_register" />
+<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<input type="submit" name="regsubmit" value="{$lang->submit_registration}" data-theme="a" />
+</fieldset>
+</div>
+</form>
+</li>
+</ul>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="member_register_agreement" version="1805"><![CDATA[<html>
+<head>
+<title>{$lang->agreement}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+<li data-role="list-divider">{$lang->agreement}</li>
+<li>
+<div>
+{$lang->agreement_1}
+<br />
+{$lang->agreement_2}
+<br />
+{$lang->agreement_3}
+<br />
+{$lang->agreement_4}
+<br />
+{$lang->agreement_5}
+</div>
+</li>
+<li>
+<form action="member.php" method="post">
+<input type="hidden" name="step" value="agreement" />
+<input type="hidden" name="action" value="register" />
+<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<input type="submit" name="agree" value="{$lang->i_agree}" data-theme="a" />
+</fieldset>
+</div>
+</form>
+</li>
+</ul>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="member_register_language" version="1805"><![CDATA[<legend>{$lang->lang_select}</legend>
+<div data-role="fieldcontain">
+<label for="language" class="select">{$lang->lang_select_desc}</label>
+<select name="language" id="language" data-native-menu="false">
+<option value="">{$lang->lang_select_default}</option>
+<option value="">-----------</option>
+{$langoptions}
+</select>
+</div>]]></template>
+		<template name="member_register_password" version="1805"><![CDATA[<div data-role="fieldcontain">
+<label for="password">{$lang->password}</label>
+<input type="password" name="password" id="password" />
+</div>
+<div data-role="fieldcontain">
+<label for="password2">{$lang->confirm_password}</label>
+<input type="password" name="password2" id="password2" />
+</div>]]></template>
+		<template name="member_register_question" version="1805"><![CDATA[<script type="text/javascript" src="{$mybb->asset_url}/jscripts/question.js?ver=1805"></script>
+<legend>{$lang->security_question}</legend>
+<div data-role="fieldcontain">
+<label for="answer">{$question['question']}<br />{$lang->question_note}</label>
+<input type="text" name="answer" value="" id="answer" />
+</div>
+<input type="hidden" name="question_id" value="{$sid}" id="question_id" />
+{$refresh}]]></template>
+		<template name="member_register_question_refresh" version="1805"><![CDATA[<div data-role="fieldcontain">
+<label for="answer"></label>
+<input type="submit" name="refresh" id="refresh" value="{$lang->refresh}" onclick="return question.refresh();" />
+</div>]]></template>
+		<template name="member_register_regimage" version="1805"><![CDATA[<script type="text/javascript" src="{$mybb->asset_url}/jscripts/captcha.js?ver=1805"></script>
+<legend>{$lang->image_verification}</legend>
+<div data-role="fieldcontain">
+<label for="imagestring">{$lang->verification_note}<br />{$lang->verification_subnote}</label>
+<img src="captcha.php?action=regimage&amp;imagehash={$imagehash}" alt="{$lang->image_verification}" id="captcha_img" />
+</div>
+<div data-role="fieldcontain">
+<label for="imagestring"></label>
+<input type="submit" name="refresh" id="refresh" value="{$lang->refresh}" onclick="return captcha.refresh();" />
+</div>
+<div data-role="fieldcontain">
+<label for="imagestring"></label>
+<input type="text" name="imagestring" value="" id="imagestring" />
+</div>
+<input type="hidden" name="imagehash" value="{$imagehash}" id="imagehash" />]]></template>
+		<template name="multipage" version="1805"><![CDATA[</div>
 <div data-role="footer" data-id="foo1" data-position="fixed">
 <div data-role="navbar">
 <ul>
@@ -250,19 +656,19 @@ img { max-width: 100%; height: auto; }
 {$end}
 </ul>
 </div>]]></template>
-		<template name="multipage_end" version="1804"><![CDATA[<li>
+		<template name="multipage_end" version="1805"><![CDATA[<li>
 <a href="{$page_url}" rel="external" class="ui-btn-active">{$lang->multipage_last}</a>
 </li>]]></template>
-		<template name="multipage_nextpage" version="1804"><![CDATA[<li>
+		<template name="multipage_nextpage" version="1805"><![CDATA[<li>
 <a href="{$page_url}" rel="external" class="ui-btn-active">{$lang->multipage_next}</a>
 </li>]]></template>
-		<template name="multipage_prevpage" version="1804"><![CDATA[<li>
+		<template name="multipage_prevpage" version="1805"><![CDATA[<li>
 <a href="{$page_url}" rel="external" class="ui-btn-active">{$lang->multipage_previous}</a>
 </li>]]></template>
-		<template name="multipage_start" version="1804"><![CDATA[<li>
+		<template name="multipage_start" version="1805"><![CDATA[<li>
 <a href="{$page_url}" rel="external" class="ui-btn-active">{$lang->multipage_first}</a>
 </li>]]></template>
-		<template name="nav" version="1804"><![CDATA[<li>
+		<template name="nav" version="1805"><![CDATA[<li>
 <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="d">
 <h4>{$lang->index}</h4>
 <ul data-role="listview">
@@ -271,14 +677,131 @@ img { max-width: 100%; height: auto; }
 </ul>
 </div>
 </li>]]></template>
-		<template name="nav_bit" version="1804"><![CDATA[<li>
+		<template name="nav_bit" version="1805"><![CDATA[<li>
 <a href="{$navbit['url']}" rel="external">{$navbit['name']}</a>
 </li>]]></template>
-		<template name="nav_bit_active" version="1804"><![CDATA[<li>
+		<template name="nav_bit_active" version="1805"><![CDATA[<li>
 <a href="{$navbit['url']}" rel="external">{$navbit['name']}</a>
 </li>]]></template>
-		<template name="postbit" version="1804"><![CDATA[]]></template>
-		<template name="postbit_ignored" version="1804"><![CDATA[<li>
+		<template name="newreply" version="1805"><![CDATA[<html>
+<head>
+<title>{$lang->post_reply_to}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+<li data-role="list-divider">{$lang->post_new_reply}</li>
+<li data-role="list-divider" data-theme="d">{$lang->reply_to}</li>
+{$reply_errors}
+{$moderation_notice}
+<li>
+<form action="newreply.php?tid={$tid}&amp;processed=1" method="post" enctype="multipart/form-data" name="input">
+<input type="hidden" name="my_post_key" value="{$mybb->post_code}" />
+{$loginbox}
+<div data-role="fieldcontain">
+<label for="subject">{$lang->post_subject}</label>
+<input type="text" name="subject" id="subject" size="40" maxlength="85" value="{$subject}" />
+</div>
+<div data-role="fieldcontain">
+<label for="message">{$lang->your_message}</label>
+<textarea name="message" id="message" rows="20" cols="70">{$message}</textarea>
+</div>
+<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<legend>{$lang->post_options}</legend>
+<input type="checkbox" name="postoptions[signature]" id="postoptions[signature]" value="1" {$postoptionschecked['signature']} />
+<label for="postoptions[signature]">{$lang->options_sig}</label>
+{$disablesmilies}
+</fieldset>
+</div>
+{$modoptions}
+{$subscriptionmethod}
+{$captcha}
+<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<input type="submit" name="submit" value="{$lang->post_reply}" data-theme="a" />
+</fieldset>
+</div>
+<input type="hidden" name="action" value="do_newreply" />
+<input type="hidden" name="replyto" value="{$replyto}" />
+<input type="hidden" name="posthash" value="{$posthash}" />
+<input type="hidden" name="attachmentaid" value="" />
+<input type="hidden" name="attachmentact" value="" />
+<input type="hidden" name="quoted_ids" value="{$quoted_ids}" />
+<input type="hidden" name="tid" value="{$tid}" />
+</form>
+</li>
+</ul>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="newreply_disablesmilies" version="1805"><![CDATA[<input type="checkbox" name="postoptions[disablesmilies]" id="postoptions[disablesmilies]" value="1" {$postoptionschecked['disablesmilies']} />
+<label for="postoptions[disablesmilies]">{$lang->options_disablesmilies}</label>]]></template>
+		<template name="newreply_disablesmilies_hidden" version="1805"><![CDATA[<input type="hidden" name="postoptions[disablesmilies]" value="no" />]]></template>
+		<template name="newreply_modoptions" version="1805"><![CDATA[<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<legend>{$lang->mod_options}</legend>
+<input type="checkbox" name="modoptions[closethread]" id="modoptions[closethread]" value="1" {$closecheck} />
+<label for="modoptions[closethread]">{$lang->close_thread}</label>
+<input type="checkbox" name="modoptions[stickthread]" id="modoptions[stickthread]" value="1" {$stickycheck} />
+<label for="modoptions[stickthread]">{$lang->stick_thread}</label>
+</fieldset>
+</div>]]></template>
+		<template name="newthread" version="1805"><![CDATA[<html>
+<head>
+<title>{$lang->newthread_in}</title>
+{$headerinclude}
+</head>
+<body>
+{$header}
+<li data-role="list-divider">{$lang->post_new_thread}</li>
+{$thread_errors}
+{$moderation_notice}
+<li>
+<form action="newthread.php?fid={$fid}&amp;processed=1" method="post" enctype="multipart/form-data" name="input">
+<input type="hidden" name="my_post_key" value="{$mybb->post_code}" />
+{$loginbox}
+<div data-role="fieldcontain">
+<label for="subject">{$lang->thread_subject}</label>
+<input type="text" name="subject" id="subject" size="40" maxlength="85" value="{$subject}" />
+</div>
+<div data-role="fieldcontain">
+<label for="message">{$lang->your_message}</label>
+<textarea name="message" id="message" rows="20" cols="70">{$message}</textarea>
+</div>
+<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<legend>{$lang->post_options}</legend>
+<input type="checkbox" name="postoptions[signature]" id="postoptions[signature]" value="1" {$postoptionschecked['signature']} />
+<label for="postoptions[signature]">{$lang->options_sig}</label>
+{$disablesmilies}
+</fieldset>
+</div>
+{$modoptions}
+{$subscriptionmethod}
+{$captcha}
+<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<input type="submit" name="submit" value="{$lang->post_thread}" data-theme="a" />
+</fieldset>
+</div>
+<input type="hidden" name="action" value="do_newthread" />
+<input type="hidden" name="posthash" value="{$posthash}" />
+<input type="hidden" name="attachmentaid" value="" />
+<input type="hidden" name="attachmentact" value="" />
+<input type="hidden" name="quoted_ids" value="{$quoted_ids}" />
+<input type="hidden" name="tid" value="{$tid}" />
+</form>
+</li>
+</ul>
+{$footer}
+</body>
+</html>]]></template>
+		<template name="newthread_disablesmilies" version="1805"><![CDATA[<input type="checkbox" name="postoptions[disablesmilies]" id="postoptions[disablesmilies]" value="1" {$postoptionschecked['disablesmilies']} />
+<label for="postoptions[disablesmilies]">{$lang->options_disablesmilies}</label>]]></template>
+		<template name="newthread_disablesmilies_hidden" version="1805"><![CDATA[<input type="hidden" name="postoptions[disablesmilies]" value="no" />]]></template>
+		<template name="postbit" version="1805"><![CDATA[]]></template>
+		<template name="postbit_ignored" version="1805"><![CDATA[<li>
 <div id="pid{$post['pid']}">
 <div data-role="collapsible">
 <h4>{$ignored_message}</h4>
@@ -290,7 +813,7 @@ img { max-width: 100%; height: auto; }
 </div>
 </div>
 </li>]]></template>
-		<template name="postbit_normal" version="1804"><![CDATA[<li>
+		<template name="postbit_normal" version="1805"><![CDATA[<li>
 <div id="pid{$post['pid']}">
 <h3>{$post['subject']}</h3>
 <p>{$post['username']} &gt; {$post['postdate']}</p>
@@ -299,9 +822,9 @@ img { max-width: 100%; height: auto; }
 </div>
 </div>
 </li>]]></template>
-		<template name="post_captcha" version="1804"><![CDATA[<div data-role="fieldcontain">
+		<template name="post_captcha" version="1805"><![CDATA[<div data-role="fieldcontain">
 <label for="imagestring">{$lang->image_verification}</label>
-<img src="{$mybb->settings['bburl']}/captcha.php?imagehash={$imagehash}" id="captcha_img" />
+<img src="{$mybb->settings['bburl']}/captcha.php?imagehash={$imagehash}" alt="{$lang->image_verification}" id="captcha_img" />
 </div>
 <div data-role="fieldcontain">
 <label for="imagestring"></label>
@@ -312,7 +835,20 @@ img { max-width: 100%; height: auto; }
 <input type="text" name="imagestring" value="" id="imagestring" size="16" />
 </div>
 <input type="hidden" name="imagehash" value="{$imagehash}" id="imagehash" />]]></template>
-		<template name="redirect" version="1804"><![CDATA[<html>
+		<template name="post_subscription_method" version="1805"><![CDATA[<div data-role="fieldcontain">
+<fieldset data-role="controlgroup">
+<legend>{$lang->thread_subscription_method}<br />{$lang->thread_subscription_method_desc}</legend>
+<input type="radio" name="postoptions[subscriptionmethod]" id="subscription_method_0" {$postoptions_subscriptionmethod_dont} value="" />
+<label for="subscription_method_0">{$lang->no_subscribe}</label>
+<input type="radio" name="postoptions[subscriptionmethod]" id="subscription_method_1" {$postoptions_subscriptionmethod_none} value="none" />
+<label for="subscription_method_1">{$lang->no_subscribe_notification}</label>
+<input type="radio" name="postoptions[subscriptionmethod]" id="subscription_method_2" {$postoptions_subscriptionmethod_email} value="email" />
+<label for="subscription_method_2">{$lang->instant_email_subscribe}</label>
+<input type="radio" name="postoptions[subscriptionmethod]" id="subscription_method_3" {$postoptions_subscriptionmethod_pm} value="pm" />
+<label for="subscription_method_3">{$lang->instant_pm_subscribe}</label>
+</fieldset>
+</div>]]></template>
+		<template name="redirect" version="1805"><![CDATA[<html>
 <head>
 <title>{$title}</title>
 <meta http-equiv="refresh" content="2;URL={$url}" />
@@ -331,13 +867,18 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="showthread" version="1804"><![CDATA[<html>
+		<template name="showthread" version="1805"><![CDATA[<html>
 <head>
 <title>{$thread['subject']}</title>
 {$headerinclude_showthread}
 </head>
 <body>
 {$header}
+<li>
+<div>
+{$newreply}
+</div>
+</li>
 <li data-role="list-divider">{$thread['subject']}</li>
 {$posts}
 <li>
@@ -351,5 +892,7 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
+		<template name="showthread_newreply" version="1805"><![CDATA[<a href="newreply.php?tid={$tid}" rel="external" data-role="button" data-inline="true" data-theme="b">{$lang->new_reply}</a>]]></template>
+		<template name="showthread_newreply_closed" version="1805"><![CDATA[<a href="newreply.php?tid={$tid}" rel="external" data-role="button" data-inline="true" data-theme="b">{$lang->thread_closed}</a>]]></template>
 	</templates>
 </theme>

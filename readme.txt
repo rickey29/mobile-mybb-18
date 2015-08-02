@@ -1,7 +1,7 @@
 Mobile MyBB 1.8 Readme
 ################
-version: 0.1.0
-last update: Sun., May 24, 2015
+version: 1.0.0
+last update: Sat., Aug. 01, 2015
 
 
 Description
@@ -25,7 +25,7 @@ Open Issue
 
 Infrastructure
 ++++++++++++++++
-This version is developed based on MyBB version 1.8.0 to 1.8.4.
+This version is developed based on MyBB version 1.8.0 to 1.8.5.
 
 
 Installation
@@ -55,6 +55,10 @@ Since I often have to update this section after I release the package, so I prov
 
 History
 ++++++++++++++++
+version 1.0.0 (Sat., Aug. 01, 2015)
+-- new feature: post thread
+-- new feature: new reply
+
 version 0.1.0 (Sun., May 24, 2015)
 -- rewrite based on plugin style
 
