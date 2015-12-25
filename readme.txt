@@ -1,7 +1,7 @@
 Mobile MyBB 1.8 Readme
 ################
-version: 1.0.0
-last update: Sat., Aug. 01, 2015
+version: 1.3.0
+last update: Fri., Dec. 25, 2015
 
 
 Description
@@ -9,6 +9,8 @@ Description
 Mobile MyBB 1.8 (MMyBB18) is a mobile-friendly MyBB 1.8 theme.
 
 It only provides essential mobile related functions, it does not support all MyBB 1.8 features.
+
+For more information, please go to: http://flexplat.com/mobile-mybb-18 .
 
 Please do NOT use this software when you are driving -- looking at mobile screen while driving is very dangerous.  If you are a webmaster, please forward this caution to your end users.
 
@@ -25,7 +27,7 @@ Open Issue
 
 Infrastructure
 ++++++++++++++++
-This version is developed based on MyBB version 1.8.0 to 1.8.5.
+This version is developed based on MyBB version 1.8.0 to 1.8.6.
 
 
 Installation
@@ -37,10 +39,10 @@ Configuration
 ++++++++++++++++
 Personalize Page Header and Footer
 ================
-The following variable content within "inc/languages/english/mmybb18.lang.php" will be displayed on the header of each mobile-friendly web page.  You can update this variable to show your web site logo and/or advertisement.
+The following variable content within "http://yoursite.com/inc/languages/english/mmybb18.lang.php" will be displayed on the header of each mobile-friendly web page.  You can update this variable to show your web site logo and/or advertisement.
 -- $l['personal_header']
 
-The following variable content within "inc/languages/english/mmybb18.lang.php" will be displayed on the footer of mobile-friendly homepage.  You can update this variable to show your web site information.
+The following variable content within "http://yoursite.com/inc/languages/english/mmybb18.lang.php" will be displayed on the footer of mobile-friendly homepage.  You can update this variable to show your web site information.
 -- $l['personal_footer']
 
 If you have other language(s) than English, please update your language file(s) as I do for "inc/languages/english/mmybb18.lang.php".
@@ -55,6 +57,9 @@ Since I often have to update this section after I release the package, so I prov
 
 History
 ++++++++++++++++
+version 1.3.0 (Fri., Dec. 25, 2015)
+-- retrofit
+
 version 1.0.0 (Sat., Aug. 01, 2015)
 -- new feature: post thread
 -- new feature: new reply

@@ -13,9 +13,9 @@ Extract MMyBB18 zip package on your PC, you will get a "mmybb18" directory.
 step 3:
 ================
 Upload following directory and files from the "mmybb18" directory to your web site:
--- inc/plugins/mmybb18.php
--- inc/plugins/mmybb18
 -- inc/languages/english/mmybb18.lang.php
+-- inc/plugins/mmybb18
+-- inc/plugins/mmybb18.php
 
 step 4:
 ================

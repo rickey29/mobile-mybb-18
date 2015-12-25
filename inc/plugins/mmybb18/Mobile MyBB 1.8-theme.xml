@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<theme name="Mobile MyBB 1.8" version="1805">
+<theme name="Mobile MyBB 1.8" version="1806">
 	<properties>
 		<templateset><![CDATA[2]]></templateset>
 		<editortheme><![CDATA[mybb.css]]></editortheme>
@@ -13,7 +13,7 @@
 	<stylesheets>
 	</stylesheets>
 	<templates>
-		<template name="announcement" version="1805"><![CDATA[<html>
+		<template name="announcement" version="1806"><![CDATA[<html>
 <head>
 <title>{$lang->forum_announcement}</title>
 {$headerinclude}
@@ -26,8 +26,8 @@
 {$footer}
 </body>
 </html>]]></template>
-		<template name="changeuserbox" version="1805"><![CDATA[]]></template>
-		<template name="error" version="1805"><![CDATA[<html>
+		<template name="changeuserbox" version="1806"><![CDATA[]]></template>
+		<template name="error" version="1806"><![CDATA[<html>
 <head>
 <title>{$title}</title>
 {$headerinclude}
@@ -42,7 +42,7 @@
 {$footer}
 </body>
 </html>]]></template>
-		<template name="error_nopermission" version="1805"><![CDATA[{$lang->error_nopermission_guest_1}
+		<template name="error_nopermission" version="1806"><![CDATA[{$lang->error_nopermission_guest_1}
 <br />
 {$lang->error_nopermission_guest_2}
 <br />
@@ -77,7 +77,7 @@
 </li>
 <li>
 <a href="member.php?action=lostpw" rel="external">{$lang->forgot_password}</a>]]></template>
-		<template name="error_nopermission_loggedin" version="1805"><![CDATA[{$lang->error_nopermission_user_1}
+		<template name="error_nopermission_loggedin" version="1806"><![CDATA[{$lang->error_nopermission_user_1}
 <br />
 {$lang->error_nopermission_user_2}
 <br />
@@ -88,15 +88,15 @@
 {$lang->error_nopermission_user_5}
 <br />
 {$lang->error_nopermission_user_username}]]></template>
-		<template name="footer" version="1805"><![CDATA[</div>
+		<template name="footer" version="1806"><![CDATA[</div>
 </div>]]></template>
-		<template name="footer_personal" version="1805"><![CDATA[</div>
+		<template name="footer_personal" version="1806"><![CDATA[</div>
 <div data-role="footer" data-theme="c">
 {$lang->personal_footer}]]></template>
-		<template name="forumbit_depth1_cat" version="1805"><![CDATA[<li data-role="list-divider">{$forum['name']}</li>
+		<template name="forumbit_depth1_cat" version="1806"><![CDATA[<li data-role="list-divider">{$forum['name']}</li>
 {$sub_forums}]]></template>
-		<template name="forumbit_depth1_forum_lastpost" version="1805"><![CDATA[<a href="{$lastpost_link}" rel="external" data-transition="slideup"></a>]]></template>
-		<template name="forumbit_depth2_cat" version="1805"><![CDATA[<li>
+		<template name="forumbit_depth1_forum_lastpost" version="1806"><![CDATA[<a href="{$lastpost_link}" rel="external" data-transition="slideup"></a>]]></template>
+		<template name="forumbit_depth2_cat" version="1806"><![CDATA[<li>
 <a href="{$forum_url}" rel="external">
 <h3>{$forum['name']}</h3>
 <p>{$forum['description']}</p>
@@ -104,7 +104,7 @@
 </a>
 {$lastpost}
 </li>]]></template>
-		<template name="forumbit_depth2_forum" version="1805"><![CDATA[<li>
+		<template name="forumbit_depth2_forum" version="1806"><![CDATA[<li>
 <a href="{$forum_url}" rel="external">
 <h3>{$forum['name']}</h3>
 <p>{$forum['description']}</p>
@@ -112,10 +112,10 @@
 </a>
 {$lastpost}
 </li>]]></template>
-		<template name="forumbit_depth2_forum_lastpost" version="1805"><![CDATA[<a href="{$lastpost_link}" rel="external" data-transition="slideup"></a>]]></template>
-		<template name="forumbit_depth2_forum_lastpost_hidden" version="1805"><![CDATA[]]></template>
-		<template name="forumbit_depth2_forum_lastpost_never" version="1805"><![CDATA[]]></template>
-		<template name="forumdisplay" version="1805"><![CDATA[<html>
+		<template name="forumbit_depth2_forum_lastpost" version="1806"><![CDATA[<a href="{$lastpost_link}" rel="external" data-transition="slideup"></a>]]></template>
+		<template name="forumbit_depth2_forum_lastpost_hidden" version="1806"><![CDATA[]]></template>
+		<template name="forumbit_depth2_forum_lastpost_never" version="1806"><![CDATA[]]></template>
+		<template name="forumdisplay" version="1806"><![CDATA[<html>
 <head>
 <title>{$foruminfo['name']}</title>
 {$headerinclude}
@@ -128,17 +128,21 @@
 {$footer}
 </body>
 </html>]]></template>
-		<template name="forumdisplay_announcements" version="1805"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->forum_announcements}</li>
+		<template name="forumdisplay_announcements" version="1806"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->forum_announcements}</li>
 {$announcements}]]></template>
-		<template name="forumdisplay_announcements_announcement" version="1805"><![CDATA[<li>
+		<template name="forumdisplay_announcements_announcement" version="1806"><![CDATA[<li>
 <a href="{$announcement['announcementlink']}" rel="external">
 <h3>{$announcement['subject']}</h3>
 <p>{$announcement['username']} &gt; {$postdate}</p>
 </a>
 </li>]]></template>
-		<template name="forumdisplay_newthread" version="1805"><![CDATA[<a href="newthread.php?fid={$fid}" rel="external" data-role="button" data-inline="true" data-theme="b">{$lang->post_thread}</a>]]></template>
-		<template name="forumdisplay_nothreads" version="1805"><![CDATA[<li>{$lang->nothreads}</li>]]></template>
-		<template name="forumdisplay_password" version="1805"><![CDATA[<html>
+		<template name="forumdisplay_newthread" version="1806"><![CDATA[<li>
+<div>
+<a href="newthread.php?fid={$fid}" rel="external" data-role="button" data-inline="true" data-theme="b">{$lang->post_thread}</a>
+</div>
+</li>]]></template>
+		<template name="forumdisplay_nothreads" version="1806"><![CDATA[<li>{$lang->nothreads}</li>]]></template>
+		<template name="forumdisplay_password" version="1806"><![CDATA[<html>
 <head>
 <title>{$lang->password_required}</title>
 {$headerinclude}
@@ -164,11 +168,11 @@
 {$footer}
 </body>
 </html>]]></template>
-		<template name="forumdisplay_password_wrongpass" version="1805"><![CDATA[<li data-theme="e">{$lang->wrong_forum_password}</li>]]></template>
-		<template name="forumdisplay_sticky_sep" version="1805"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->sticky_threads}</li>]]></template>
-		<template name="forumdisplay_subforums" version="1805"><![CDATA[<li data-role="list-divider">{$lang->sub_forums_in}</li>
+		<template name="forumdisplay_password_wrongpass" version="1806"><![CDATA[<li data-theme="e">{$lang->wrong_forum_password}</li>]]></template>
+		<template name="forumdisplay_sticky_sep" version="1806"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->sticky_threads}</li>]]></template>
+		<template name="forumdisplay_subforums" version="1806"><![CDATA[<li data-role="list-divider">{$lang->sub_forums_in}</li>
 {$forums}]]></template>
-		<template name="forumdisplay_thread" version="1805"><![CDATA[<li>
+		<template name="forumdisplay_thread" version="1806"><![CDATA[<li>
 <a href="{$thread['threadlink']}" rel="external">
 <h3>{$thread['subject']}</h3>
 <p>{$thread['threadusername']} &gt; {$lastpostdate}</p>
@@ -176,28 +180,33 @@
 </a>
 <a href="{$thread['lastpostlink']}" rel="external" data-transition="slideup"></a>
 </li>]]></template>
-		<template name="forumdisplay_threadlist" version="1805"><![CDATA[<li>
-<div>
-{$newthread}
-</div>
-</li>
+		<template name="forumdisplay_threadlist" version="1806"><![CDATA[{$newthread}
 <li data-role="list-divider">{$foruminfo['name']}</li>
 {$announcementlist}
 {$threads}
 </ul>
 {$multipage}]]></template>
-		<template name="forumdisplay_threads_sep" version="1805"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->normal_threads}</li>]]></template>
-		<template name="global_moderation_notice" version="1805"><![CDATA[<li>{$moderation_text}</li>]]></template>
-		<template name="header" version="1805"><![CDATA[<div data-role="page">
+		<template name="forumdisplay_threads_sep" version="1806"><![CDATA[<li data-role="list-divider" data-theme="d">{$lang->normal_threads}</li>]]></template>
+		<template name="global_moderation_notice" version="1806"><![CDATA[<li>{$moderation_text}</li>]]></template>
+		<template name="header" version="1806"><![CDATA[<div data-role="page">
+<div data-role="panel" id="m-panel" data-display="overlay">
+<ul data-role="listview">
+<li data-role="list-divider">{$lang->options}</li>
+{$welcomeblock}
+<li>
+<a href="{$mybb->settings['bburl']}/index.php?m-redirection=desktop" rel="external">{$lang->switch_to_desktop_style}</a>
+</li>
+</ul>
+</div>
 <div data-role="header" data-position="fixed">
-<a href="{$mybb->settings['bburl']}/index.php?m-mode=option" data-rel="dialog" data-icon="bars" data-transition="pop">{$lang->options}</a>
+<a href="#m-panel" data-icon="bars">{$lang->options}</a>
 <h1>{$mybb->settings['bbname']}</h1>
 </div>
 <div data-role="content">
 <ul data-role="listview">
 {$header_personal}
 <navigation>]]></template>
-		<template name="headerinclude" version="1805"><![CDATA[<link rel="alternate" type="application/rss+xml" title="{$lang->latest_threads} (RSS 2.0)" href="{$mybb->settings['bburl']}/syndication.php" />
+		<template name="headerinclude" version="1806"><![CDATA[<link rel="alternate" type="application/rss+xml" title="{$lang->latest_threads} (RSS 2.0)" href="{$mybb->settings['bburl']}/syndication.php" />
 <link rel="alternate" type="application/atom+xml" title="{$lang->latest_threads} (Atom 1.0)" href="{$mybb->settings['bburl']}/syndication.php?type=atom1.0" />
 <meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
@@ -208,38 +217,20 @@
 <style type="text/css">
 img { max-width: 100%; height: auto; }
 </style>]]></template>
-		<template name="headerinclude_showthread" version="1805"><![CDATA[<link rel="alternate" type="application/rss+xml" title="{$lang->latest_threads} (RSS 2.0)" href="{$mybb->settings['bburl']}/syndication.php" />
-<link rel="alternate" type="application/atom+xml" title="{$lang->latest_threads} (Atom 1.0)" href="{$mybb->settings['bburl']}/syndication.php?type=atom1.0" />
-<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/jquery-1.9.1.min.js"></script>
-<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-<style type="text/css">
-img { max-width: 100%; height: auto; }
-</style>
-<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/scroll_to_hash.js"></script>]]></template>
-		<template name="header_option" version="1805"><![CDATA[<div data-role="page">
-<div data-role="header" data-position="fixed">
-<h1>{$lang->options}</h1>
-</div>
-<div data-role="content">
-<ul data-role="listview">]]></template>
-		<template name="header_personal" version="1805"><![CDATA[<li>
+		<template name="header_personal" version="1806"><![CDATA[<li>
 {$lang->personal_header}
 </li>]]></template>
-		<template name="header_welcomeblock_guest" version="1805"><![CDATA[<li>
+		<template name="header_welcomeblock_guest" version="1806"><![CDATA[<li>
 <a href="{$mybb->settings['bburl']}/member.php?action=login" rel="external">{$lang->welcome_login}</a>
 </li>
 <li>
 <a href="{$mybb->settings['bburl']}/member.php?action=register" rel="external">{$lang->welcome_register}</a>
 </li>]]></template>
-		<template name="header_welcomeblock_member" version="1805"><![CDATA[<li>
+		<template name="header_welcomeblock_member" version="1806"><![CDATA[<li>
 <a href="{$mybb->settings['bburl']}/member.php?action=logout&amp;logoutkey={$mybb->user['logoutkey']}" rel="external">{$lang->welcome_logout}</a>
 </li>]]></template>
-		<template name="htmldoctype" version="1805"><![CDATA[<!DOCTYPE html>]]></template>
-		<template name="index" version="1805"><![CDATA[<html>
+		<template name="htmldoctype" version="1806"><![CDATA[<!DOCTYPE html>]]></template>
+		<template name="index" version="1806"><![CDATA[<html>
 <head>
 <title>{$mybb->settings['bbname']}</title>
 {$headerinclude}
@@ -252,28 +243,12 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="index_option" version="1805"><![CDATA[<html>
-<head>
-<title>{$lang->options}</title>
-{$headerinclude}
-</head>
-<body>
-{$header_option}
-{$index_panel}
-</ul>
-{$footer}
-</body>
-</html>]]></template>
-		<template name="index_panel" version="1805"><![CDATA[{$welcomeblock}
-<li>
-<a href="{$mybb->settings['bburl']}/index.php?m-redirection=desktop" rel="external">{$lang->switch_to_deskto_style}</a>
-</li>]]></template>
-		<template name="loginbox" version="1805"><![CDATA[<div data-role="fieldcontain">
+		<template name="loginbox" version="1806"><![CDATA[<div data-role="fieldcontain">
 <label for="username">{$lang->username}</label>
 <input type="text" name="username" id="username" size="30" value="{$username}" />
 </div>]]></template>
-		<template name="member_loggedin_notice" version="1805"><![CDATA[<li>{$lang->already_logged_in}</li>]]></template>
-		<template name="member_login" version="1805"><![CDATA[<html>
+		<template name="member_loggedin_notice" version="1806"><![CDATA[<li>{$lang->already_logged_in}</li>]]></template>
+		<template name="member_login" version="1806"><![CDATA[<html>
 <head>
 <title>{$lang->login}</title>
 {$headerinclude}
@@ -317,7 +292,7 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="member_lostpw" version="1805"><![CDATA[<html>
+		<template name="member_lostpw" version="1806"><![CDATA[<html>
 <head>
 <title>{$lang->lost_pw}</title>
 {$headerinclude}
@@ -343,146 +318,7 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="member_profile" version="1805"><![CDATA[<html>
-<head>
-<title>{$lang->profile}</title>
-{$headerinclude}
-</head>
-<body>
-{$header}
-<li data-role="list-divider">{$memprofile['username']} ({$usertitle})</li>
-<li>
-{$lang->registration_date} {$memregdate}
-</li>
-<li>
-{$lang->date_of_birth} {$membday} {$membdayage}
-</li>
-<li>
-{$lang->local_time} {$localtime}
-</li>
-<li>
-{$lang->postbit_status} {$online_status}
-</li>
-{$awaybit}
-{$bannedbit}
-<li data-role="list-divider">{$lang->users_forum_info}</li>
-<li>
-{$lang->joined} {$memregdate}
-</li>
-<li>
-{$lang->lastvisit} {$memlastvisitdate}
-</li>
-<li>
-<div>
-{$lang->total_posts} {$memprofile['postnum']} ({$lang->ppd_percent_total})<br />(<a href="search.php?action=finduser&amp;uid={$uid}" rel="external">{$lang->find_posts}</a>)
-</div>
-</li>
-<li>
-<div>
-{$lang->total_threads} {$memprofile['threadnum']} ({$lang->tpd_percent_total})<br />(<a href="search.php?action=finduserthreads&amp;uid={$uid}" rel="external">{$lang->find_threads}</a>)
-</div>
-</li>
-<li>
-{$lang->timeonline} {$timeonline}
-</li>
-{$referrals}
-{$reputation}
-{$warning_level}
-{$contact_details}
-{$profilefields}
-{$signature}
-{$buddy_options}
-{$ignore_options}
-</ul>
-{$footer}
-</body>
-</html>]]></template>
-		<template name="member_profile_addremove" version="1805"><![CDATA[<li>
-<a href="{$add_remove_options['url']}" rel="external">{$add_remove_options['lang']}</a>
-</li>]]></template>
-		<template name="member_profile_away" version="1805"><![CDATA[<li data-role="list-divider">{$lang->away_note}</li>
-<li>
-{$lang->away_reason} {$awayreason}
-</li>
-<li>
-{$lang->away_since} {$awaydate} &mdash; {$lang->away_returns} {$returndate}
-</li>]]></template>
-		<template name="member_profile_banned" version="1805"><![CDATA[<li data-role="list-divider">{$lang->ban_note}</li>
-<li>
-{$lang->banned_warning2}: {$memban['reason']}
-</li>
-<li>
-<div>
-{$lang->ban_by}: {$memban['adminuser']} &mdash; {$lang->ban_length}: {$banlength} {$timeremaining}
-</div>
-</li>]]></template>
-		<template name="member_profile_contact_details" version="1805"><![CDATA[<li data-role="list-divider">{$lang->users_contact_details}</li>
-{$website}
-{$sendemail}
-{$sendpm}
-{$contact_fields['icq']}
-{$contact_fields['aim']}
-{$contact_fields['yahoo']}
-{$contact_fields['skype']}
-{$contact_fields['google']}]]></template>
-		<template name="member_profile_contact_fields_aim" version="1805"><![CDATA[<li>
-{$lang->aim_screenname} {$memprofile['aim']}
-</li>]]></template>
-		<template name="member_profile_contact_fields_google" version="1805"><![CDATA[<li>
-{$lang->google_id} {$memprofile['google']}
-</li>]]></template>
-		<template name="member_profile_contact_fields_icq" version="1805"><![CDATA[<li>
-{$lang->icq_number} {$memprofile['icq']}
-</li>]]></template>
-		<template name="member_profile_contact_fields_skype" version="1805"><![CDATA[<li>
-{$lang->skype_id} {$memprofile['skype']}
-</li>]]></template>
-		<template name="member_profile_contact_fields_yahoo" version="1805"><![CDATA[<li>
-{$lang->yahoo_id} {$memprofile['yahoo']}
-</li>]]></template>
-		<template name="member_profile_customfields" version="1805"><![CDATA[<li data-role="list-divider">{$lang->users_additional_info}</li>
-{$customfields}]]></template>
-		<template name="member_profile_customfields_field" version="1805"><![CDATA[<li>
-{$customfield['name']}: {$customfieldval}
-</li>]]></template>
-		<template name="member_profile_email" version="1805"><![CDATA[<li>
-<div>
-{$lang->email} <a href="member.php?action=emailuser&amp;uid={$memprofile['uid']}" rel="external">{$lang->send_user_email}</a>
-</div>
-</li>]]></template>
-		<template name="member_profile_offline" version="1805"><![CDATA[{$lang->postbit_status_offline}]]></template>
-		<template name="member_profile_online" version="1805"><![CDATA[{$lang->postbit_status_online}]]></template>
-		<template name="member_profile_pm" version="1805"><![CDATA[<li>
-<div>
-{$lang->pm} <a href="private.php?action=send&amp;uid={$memprofile['uid']}" rel="external">{$lang->send_pm}</a>
-</div>
-</li>]]></template>
-		<template name="member_profile_referrals" version="1805"><![CDATA[<li>
-{$lang->members_referred} {$memprofile['referrals']}
-</li>]]></template>
-		<template name="member_profile_reputation" version="1805"><![CDATA[<li>
-<div>
-{$lang->reputation} {$memprofile['reputation']} [<a href="reputation.php?uid={$memprofile['uid']}" rel="external">{$lang->reputation_details}</a>]
-</div>
-</li>]]></template>
-		<template name="member_profile_signature" version="1805"><![CDATA[<li data-role="list-divider">{$lang->users_signature}</li>
-<li>
-<div>
-{$memprofile['signature']}
-</div>
-</li>]]></template>
-		<template name="member_profile_warn" version="1805"><![CDATA[[<a href="warnings.php?action=warn&amp;uid={$memprofile['uid']}" rel="external">{$lang->warn}</a>]]]></template>
-		<template name="member_profile_warninglevel" version="1805"><![CDATA[<li>
-<div>
-{$lang->warning_level} <a href="{$warning_link}" rel="external">{$warning_level}</a> {$warn_user}
-</div>
-</li>]]></template>
-		<template name="member_profile_website" version="1805"><![CDATA[<li>
-<div>
-{$lang->homepage} <a href="{$memprofile['website']}" rel="external">{$memprofile['website']}</a>
-</div>
-</li>]]></template>
-		<template name="member_register" version="1805"><![CDATA[<html>
+		<template name="member_register" version="1806"><![CDATA[<html>
 <head>
 <title>{$lang->registration}</title>
 {$headerinclude}
@@ -566,7 +402,7 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="member_register_agreement" version="1805"><![CDATA[<html>
+		<template name="member_register_agreement" version="1806"><![CDATA[<html>
 <head>
 <title>{$lang->agreement}</title>
 {$headerinclude}
@@ -602,7 +438,7 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="member_register_language" version="1805"><![CDATA[<legend>{$lang->lang_select}</legend>
+		<template name="member_register_language" version="1806"><![CDATA[<legend>{$lang->lang_select}</legend>
 <div data-role="fieldcontain">
 <label for="language" class="select">{$lang->lang_select_desc}</label>
 <select name="language" id="language" data-native-menu="false">
@@ -611,7 +447,7 @@ img { max-width: 100%; height: auto; }
 {$langoptions}
 </select>
 </div>]]></template>
-		<template name="member_register_password" version="1805"><![CDATA[<div data-role="fieldcontain">
+		<template name="member_register_password" version="1806"><![CDATA[<div data-role="fieldcontain">
 <label for="password">{$lang->password}</label>
 <input type="password" name="password" id="password" />
 </div>
@@ -619,7 +455,7 @@ img { max-width: 100%; height: auto; }
 <label for="password2">{$lang->confirm_password}</label>
 <input type="password" name="password2" id="password2" />
 </div>]]></template>
-		<template name="member_register_question" version="1805"><![CDATA[<script type="text/javascript" src="{$mybb->asset_url}/jscripts/question.js?ver=1805"></script>
+		<template name="member_register_question" version="1806"><![CDATA[<script type="text/javascript" src="{$mybb->asset_url}/jscripts/question.js?ver=1806"></script>
 <legend>{$lang->security_question}</legend>
 <div data-role="fieldcontain">
 <label for="answer">{$question['question']}<br />{$lang->question_note}</label>
@@ -627,11 +463,11 @@ img { max-width: 100%; height: auto; }
 </div>
 <input type="hidden" name="question_id" value="{$sid}" id="question_id" />
 {$refresh}]]></template>
-		<template name="member_register_question_refresh" version="1805"><![CDATA[<div data-role="fieldcontain">
+		<template name="member_register_question_refresh" version="1806"><![CDATA[<div data-role="fieldcontain">
 <label for="answer"></label>
 <input type="submit" name="refresh" id="refresh" value="{$lang->refresh}" onclick="return question.refresh();" />
 </div>]]></template>
-		<template name="member_register_regimage" version="1805"><![CDATA[<script type="text/javascript" src="{$mybb->asset_url}/jscripts/captcha.js?ver=1805"></script>
+		<template name="member_register_regimage" version="1806"><![CDATA[<script type="text/javascript" src="{$mybb->asset_url}/jscripts/captcha.js?ver=1806"></script>
 <legend>{$lang->image_verification}</legend>
 <div data-role="fieldcontain">
 <label for="imagestring">{$lang->verification_note}<br />{$lang->verification_subnote}</label>
@@ -646,7 +482,7 @@ img { max-width: 100%; height: auto; }
 <input type="text" name="imagestring" value="" id="imagestring" />
 </div>
 <input type="hidden" name="imagehash" value="{$imagehash}" id="imagehash" />]]></template>
-		<template name="multipage" version="1805"><![CDATA[</div>
+		<template name="multipage" version="1806"><![CDATA[</div>
 <div data-role="footer" data-id="foo1" data-position="fixed">
 <div data-role="navbar">
 <ul>
@@ -656,19 +492,19 @@ img { max-width: 100%; height: auto; }
 {$end}
 </ul>
 </div>]]></template>
-		<template name="multipage_end" version="1805"><![CDATA[<li>
+		<template name="multipage_end" version="1806"><![CDATA[<li>
 <a href="{$page_url}" rel="external" class="ui-btn-active">{$lang->multipage_last}</a>
 </li>]]></template>
-		<template name="multipage_nextpage" version="1805"><![CDATA[<li>
+		<template name="multipage_nextpage" version="1806"><![CDATA[<li>
 <a href="{$page_url}" rel="external" class="ui-btn-active">{$lang->multipage_next}</a>
 </li>]]></template>
-		<template name="multipage_prevpage" version="1805"><![CDATA[<li>
+		<template name="multipage_prevpage" version="1806"><![CDATA[<li>
 <a href="{$page_url}" rel="external" class="ui-btn-active">{$lang->multipage_previous}</a>
 </li>]]></template>
-		<template name="multipage_start" version="1805"><![CDATA[<li>
+		<template name="multipage_start" version="1806"><![CDATA[<li>
 <a href="{$page_url}" rel="external" class="ui-btn-active">{$lang->multipage_first}</a>
 </li>]]></template>
-		<template name="nav" version="1805"><![CDATA[<li>
+		<template name="nav" version="1806"><![CDATA[<li>
 <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="d">
 <h4>{$lang->index}</h4>
 <ul data-role="listview">
@@ -677,13 +513,13 @@ img { max-width: 100%; height: auto; }
 </ul>
 </div>
 </li>]]></template>
-		<template name="nav_bit" version="1805"><![CDATA[<li>
+		<template name="nav_bit" version="1806"><![CDATA[<li>
 <a href="{$navbit['url']}" rel="external">{$navbit['name']}</a>
 </li>]]></template>
-		<template name="nav_bit_active" version="1805"><![CDATA[<li>
+		<template name="nav_bit_active" version="1806"><![CDATA[<li>
 <a href="{$navbit['url']}" rel="external">{$navbit['name']}</a>
 </li>]]></template>
-		<template name="newreply" version="1805"><![CDATA[<html>
+		<template name="newreply" version="1806"><![CDATA[<html>
 <head>
 <title>{$lang->post_reply_to}</title>
 {$headerinclude}
@@ -735,10 +571,9 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="newreply_disablesmilies" version="1805"><![CDATA[<input type="checkbox" name="postoptions[disablesmilies]" id="postoptions[disablesmilies]" value="1" {$postoptionschecked['disablesmilies']} />
+		<template name="newreply_disablesmilies" version="1806"><![CDATA[<input type="checkbox" name="postoptions[disablesmilies]" id="postoptions[disablesmilies]" value="1" {$postoptionschecked['disablesmilies']} />
 <label for="postoptions[disablesmilies]">{$lang->options_disablesmilies}</label>]]></template>
-		<template name="newreply_disablesmilies_hidden" version="1805"><![CDATA[<input type="hidden" name="postoptions[disablesmilies]" value="no" />]]></template>
-		<template name="newreply_modoptions" version="1805"><![CDATA[<div data-role="fieldcontain">
+		<template name="newreply_modoptions" version="1806"><![CDATA[<div data-role="fieldcontain">
 <fieldset data-role="controlgroup">
 <legend>{$lang->mod_options}</legend>
 <input type="checkbox" name="modoptions[closethread]" id="modoptions[closethread]" value="1" {$closecheck} />
@@ -747,7 +582,7 @@ img { max-width: 100%; height: auto; }
 <label for="modoptions[stickthread]">{$lang->stick_thread}</label>
 </fieldset>
 </div>]]></template>
-		<template name="newthread" version="1805"><![CDATA[<html>
+		<template name="newthread" version="1806"><![CDATA[<html>
 <head>
 <title>{$lang->newthread_in}</title>
 {$headerinclude}
@@ -797,24 +632,11 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="newthread_disablesmilies" version="1805"><![CDATA[<input type="checkbox" name="postoptions[disablesmilies]" id="postoptions[disablesmilies]" value="1" {$postoptionschecked['disablesmilies']} />
+		<template name="newthread_disablesmilies" version="1806"><![CDATA[<input type="checkbox" name="postoptions[disablesmilies]" id="postoptions[disablesmilies]" value="1" {$postoptionschecked['disablesmilies']} />
 <label for="postoptions[disablesmilies]">{$lang->options_disablesmilies}</label>]]></template>
-		<template name="newthread_disablesmilies_hidden" version="1805"><![CDATA[<input type="hidden" name="postoptions[disablesmilies]" value="no" />]]></template>
-		<template name="postbit" version="1805"><![CDATA[]]></template>
-		<template name="postbit_ignored" version="1805"><![CDATA[<li>
+		<template name="postbit" version="1806"><![CDATA[<li>
 <div id="pid{$post['pid']}">
-<div data-role="collapsible">
-<h4>{$ignored_message}</h4>
-<h3>{$post['subject']}</h3>
-<p>{$post['username']} &gt; {$post['postdate']}</p>
-<div>
-{$post['message']}
-</div>
-</div>
-</div>
-</li>]]></template>
-		<template name="postbit_normal" version="1805"><![CDATA[<li>
-<div id="pid{$post['pid']}">
+{$ignore_bit}
 <h3>{$post['subject']}</h3>
 <p>{$post['username']} &gt; {$post['postdate']}</p>
 <div>
@@ -822,7 +644,9 @@ img { max-width: 100%; height: auto; }
 </div>
 </div>
 </li>]]></template>
-		<template name="post_captcha" version="1805"><![CDATA[<div data-role="fieldcontain">
+		<template name="postbit_ignored" version="1806"><![CDATA[<div data-role="collapsible">
+<h4>{$ignored_message}</h4>]]></template>
+		<template name="post_captcha" version="1806"><![CDATA[<div data-role="fieldcontain">
 <label for="imagestring">{$lang->image_verification}</label>
 <img src="{$mybb->settings['bburl']}/captcha.php?imagehash={$imagehash}" alt="{$lang->image_verification}" id="captcha_img" />
 </div>
@@ -835,7 +659,7 @@ img { max-width: 100%; height: auto; }
 <input type="text" name="imagestring" value="" id="imagestring" size="16" />
 </div>
 <input type="hidden" name="imagehash" value="{$imagehash}" id="imagehash" />]]></template>
-		<template name="post_subscription_method" version="1805"><![CDATA[<div data-role="fieldcontain">
+		<template name="post_subscription_method" version="1806"><![CDATA[<div data-role="fieldcontain">
 <fieldset data-role="controlgroup">
 <legend>{$lang->thread_subscription_method}<br />{$lang->thread_subscription_method_desc}</legend>
 <input type="radio" name="postoptions[subscriptionmethod]" id="subscription_method_0" {$postoptions_subscriptionmethod_dont} value="" />
@@ -848,7 +672,7 @@ img { max-width: 100%; height: auto; }
 <label for="subscription_method_3">{$lang->instant_pm_subscribe}</label>
 </fieldset>
 </div>]]></template>
-		<template name="redirect" version="1805"><![CDATA[<html>
+		<template name="redirect" version="1806"><![CDATA[<html>
 <head>
 <title>{$title}</title>
 <meta http-equiv="refresh" content="2;URL={$url}" />
@@ -867,18 +691,15 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="showthread" version="1805"><![CDATA[<html>
+		<template name="showthread" version="1806"><![CDATA[<html>
 <head>
 <title>{$thread['subject']}</title>
-{$headerinclude_showthread}
+{$headerinclude}
+<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/scroll_to_hash.js"></script>
 </head>
 <body>
 {$header}
-<li>
-<div>
 {$newreply}
-</div>
-</li>
 <li data-role="list-divider">{$thread['subject']}</li>
 {$posts}
 <li>
@@ -892,7 +713,15 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="showthread_newreply" version="1805"><![CDATA[<a href="newreply.php?tid={$tid}" rel="external" data-role="button" data-inline="true" data-theme="b">{$lang->new_reply}</a>]]></template>
-		<template name="showthread_newreply_closed" version="1805"><![CDATA[<a href="newreply.php?tid={$tid}" rel="external" data-role="button" data-inline="true" data-theme="b">{$lang->thread_closed}</a>]]></template>
+		<template name="showthread_newreply" version="1806"><![CDATA[<li>
+<div>
+<a href="newreply.php?tid={$tid}" rel="external" data-role="button" data-inline="true" data-theme="b">{$lang->new_reply}</a>
+</div>
+</li>]]></template>
+		<template name="showthread_newreply_closed" version="1806"><![CDATA[<li>
+<div>
+<a href="newreply.php?tid={$tid}" rel="external" data-role="button" data-inline="true" data-theme="b">{$lang->thread_closed}</a>
+</div>
+</li>]]></template>
 	</templates>
 </theme>
