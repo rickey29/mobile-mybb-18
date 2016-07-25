@@ -1,7 +1,7 @@
 Mobile MyBB 1.8 Readme
 ################
-version: 1.3.0
-last update: Fri., Dec. 25, 2015
+version: 1.4.0
+last update: Mon., Jul. 25, 2016
 
 
 Description
@@ -27,7 +27,7 @@ Open Issue
 
 Infrastructure
 ++++++++++++++++
-This version is developed based on MyBB version 1.8.0 to 1.8.6.
+This version is developed based on MyBB version 1.8.0 to 1.8.7.
 
 
 Installation
@@ -39,10 +39,10 @@ Configuration
 ++++++++++++++++
 Personalize Page Header and Footer
 ================
-The following variable content within "http://yoursite.com/inc/languages/english/mmybb18.lang.php" will be displayed on the header of each mobile-friendly web page.  You can update this variable to show your web site logo and/or advertisement.
+The following variable content within "inc/languages/english/mmybb18.lang.php" will be displayed on the header of each mobile-friendly web page.  You can update this variable to show your web site logo and/or advertisement.
 -- $l['personal_header']
 
-The following variable content within "http://yoursite.com/inc/languages/english/mmybb18.lang.php" will be displayed on the footer of mobile-friendly homepage.  You can update this variable to show your web site information.
+The following variable content within "inc/languages/english/mmybb18.lang.php" will be displayed on the footer of mobile-friendly homepage.  You can update this variable to show your web site information.
 -- $l['personal_footer']
 
 If you have other language(s) than English, please update your language file(s) as I do for "inc/languages/english/mmybb18.lang.php".
@@ -57,6 +57,9 @@ Since I often have to update this section after I release the package, so I prov
 
 History
 ++++++++++++++++
+version 1.4.0 (Mon., Jul. 25, 2015)
+-- bug fix: remove register feature because of scroll issue
+
 version 1.3.0 (Fri., Dec. 25, 2015)
 -- retrofit
 

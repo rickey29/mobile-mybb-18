@@ -73,9 +73,6 @@
 </form>
 </li>
 <li>
-<a href="member.php?action=register" rel="external">{$lang->need_reg}</a>
-</li>
-<li>
 <a href="member.php?action=lostpw" rel="external">{$lang->forgot_password}</a>]]></template>
 		<template name="error_nopermission_loggedin" version="1806"><![CDATA[{$lang->error_nopermission_user_1}
 <br />
@@ -92,7 +89,7 @@
 </div>]]></template>
 		<template name="footer_personal" version="1806"><![CDATA[</div>
 <div data-role="footer" data-theme="c">
-{$lang->personal_footer}]]></template>
+<h4>{$lang->personal_footer}</h4>]]></template>
 		<template name="forumbit_depth1_cat" version="1806"><![CDATA[<li data-role="list-divider">{$forum['name']}</li>
 {$sub_forums}]]></template>
 		<template name="forumbit_depth1_forum_lastpost" version="1806"><![CDATA[<a href="{$lastpost_link}" rel="external" data-transition="slideup"></a>]]></template>
@@ -194,7 +191,7 @@
 <li data-role="list-divider">{$lang->options}</li>
 {$welcomeblock}
 <li>
-<a href="{$mybb->settings['bburl']}/index.php?m-redirection=desktop" rel="external">{$lang->switch_to_desktop_style}</a>
+<a href="{$mybb->settings['bburl']}/index.php?m-redirection=desktop" rel="external">{$lang->desktop_style}</a>
 </li>
 </ul>
 </div>
@@ -222,9 +219,6 @@ img { max-width: 100%; height: auto; }
 </li>]]></template>
 		<template name="header_welcomeblock_guest" version="1806"><![CDATA[<li>
 <a href="{$mybb->settings['bburl']}/member.php?action=login" rel="external">{$lang->welcome_login}</a>
-</li>
-<li>
-<a href="{$mybb->settings['bburl']}/member.php?action=register" rel="external">{$lang->welcome_register}</a>
 </li>]]></template>
 		<template name="header_welcomeblock_member" version="1806"><![CDATA[<li>
 <a href="{$mybb->settings['bburl']}/member.php?action=logout&amp;logoutkey={$mybb->user['logoutkey']}" rel="external">{$lang->welcome_logout}</a>
@@ -318,170 +312,6 @@ img { max-width: 100%; height: auto; }
 {$footer}
 </body>
 </html>]]></template>
-		<template name="member_register" version="1806"><![CDATA[<html>
-<head>
-<title>{$lang->registration}</title>
-{$headerinclude}
-</head>
-<body>
-{$header}
-<li data-role="list-divider">{$lang->registration}</li>
-{$regerrors}
-<li>
-<form action="member.php" method="post" id="registration_form">
-<input type="hidden" name="regcheck1" value="" />
-<input type="hidden" name="regcheck2" value="true" />
-<legend>{$lang->account_details}</legend>
-<div data-role="fieldcontain">
-<label for="username">{$lang->username}</label>
-<input type="text" name="username" id="username" value="{$username}" />
-</div>
-{$passboxes}
-<div data-role="fieldcontain">
-<label for="email">{$lang->email}</label>
-<input type="text" name="email" id="email" maxlength="50" value="{$email}" />
-</div>
-<div data-role="fieldcontain">
-<label for="email2">{$lang->confirm_email}</label>
-<input type="text" name="email2" id="email2" maxlength="50" value="{$email2}" />
-</div>
-{$regimage}
-{$questionbox}
-<legend>{$lang->account_prefs}</legend>
-<div data-role="fieldcontain">
-<fieldset data-role="controlgroup">
-<legend></legend>
-<input type="checkbox" name="allownotices" id="allownotices" value="1" {$allownoticescheck} />
-<label for="allownotices">{$lang->allow_notices}</label>
-<input type="checkbox" name="hideemail" id="hideemail" value="1" {$hideemailcheck} />
-<label for="hideemail">{$lang->hide_email}</label>
-<input type="checkbox" name="receivepms" id="receivepms" value="1" {$receivepmscheck} />
-<label for="receivepms">{$lang->receive_pms}</label>
-<input type="checkbox" name="pmnotice" id="pmnotice" value="1"{$pmnoticecheck} />
-<label for="pmnotice">{$lang->pm_notice}</label>
-<input type="checkbox" name="pmnotify" id="pmnotify" value="1" {$pmnotifycheck} />
-<label for="pmnotify">{$lang->email_notify_newpm}</label>
-<input type="checkbox" name="invisible" id="invisible" value="1" {$invisiblecheck} />
-<label for="invisible">{$lang->invisible_mode}</label>
-</fieldset>
-</div>
-<div data-role="fieldcontain">
-<label for="subscriptionmethod" class="select">{$lang->subscription_method}</label>
-<select name="subscriptionmethod" id="subscriptionmethod" data-native-menu="false">
-<option value="0" {$no_auto_subscribe_selected}>{$lang->no_auto_subscribe}</option>
-<option value="1" {$no_subscribe_selected}>{$lang->no_subscribe}</option>
-<option value="2" {$instant_email_subscribe_selected}>{$lang->instant_email_subscribe}</option>
-<option value="3" {$instant_pm_subscribe_selected}>{$lang->instant_pm_subscribe}</option>
-</select>
-</div>
-<legend>{$lang->time_offset}</legend>
-<div data-role="fieldcontain">
-<label for="timezoneoffset" class="select">{$lang->time_offset_desc}</label>
-{$tzselect}
-</div>
-<div data-role="fieldcontain">
-<label for="dstcorrection" class="select">{$lang->dst_correction}</label>
-<select name="dstcorrection" id="dstcorrection" data-native-menu="false">
-<option value="2" {$dst_auto_selected}>{$lang->dst_correction_auto}</option>
-<option value="1" {$dst_enabled_selected}>{$lang->dst_correction_enabled}</option>
-<option value="0" {$dst_disabled_selected}>{$lang->dst_correction_disabled}</option>
-</select>
-</div>
-{$boardlanguage}
-<input type="hidden" name="regtime" value="{$time}" />
-<input type="hidden" name="step" value="registration" />
-<input type="hidden" name="action" value="do_register" />
-<div data-role="fieldcontain">
-<fieldset data-role="controlgroup">
-<input type="submit" name="regsubmit" value="{$lang->submit_registration}" data-theme="a" />
-</fieldset>
-</div>
-</form>
-</li>
-</ul>
-{$footer}
-</body>
-</html>]]></template>
-		<template name="member_register_agreement" version="1806"><![CDATA[<html>
-<head>
-<title>{$lang->agreement}</title>
-{$headerinclude}
-</head>
-<body>
-{$header}
-<li data-role="list-divider">{$lang->agreement}</li>
-<li>
-<div>
-{$lang->agreement_1}
-<br />
-{$lang->agreement_2}
-<br />
-{$lang->agreement_3}
-<br />
-{$lang->agreement_4}
-<br />
-{$lang->agreement_5}
-</div>
-</li>
-<li>
-<form action="member.php" method="post">
-<input type="hidden" name="step" value="agreement" />
-<input type="hidden" name="action" value="register" />
-<div data-role="fieldcontain">
-<fieldset data-role="controlgroup">
-<input type="submit" name="agree" value="{$lang->i_agree}" data-theme="a" />
-</fieldset>
-</div>
-</form>
-</li>
-</ul>
-{$footer}
-</body>
-</html>]]></template>
-		<template name="member_register_language" version="1806"><![CDATA[<legend>{$lang->lang_select}</legend>
-<div data-role="fieldcontain">
-<label for="language" class="select">{$lang->lang_select_desc}</label>
-<select name="language" id="language" data-native-menu="false">
-<option value="">{$lang->lang_select_default}</option>
-<option value="">-----------</option>
-{$langoptions}
-</select>
-</div>]]></template>
-		<template name="member_register_password" version="1806"><![CDATA[<div data-role="fieldcontain">
-<label for="password">{$lang->password}</label>
-<input type="password" name="password" id="password" />
-</div>
-<div data-role="fieldcontain">
-<label for="password2">{$lang->confirm_password}</label>
-<input type="password" name="password2" id="password2" />
-</div>]]></template>
-		<template name="member_register_question" version="1806"><![CDATA[<script type="text/javascript" src="{$mybb->asset_url}/jscripts/question.js?ver=1806"></script>
-<legend>{$lang->security_question}</legend>
-<div data-role="fieldcontain">
-<label for="answer">{$question['question']}<br />{$lang->question_note}</label>
-<input type="text" name="answer" value="" id="answer" />
-</div>
-<input type="hidden" name="question_id" value="{$sid}" id="question_id" />
-{$refresh}]]></template>
-		<template name="member_register_question_refresh" version="1806"><![CDATA[<div data-role="fieldcontain">
-<label for="answer"></label>
-<input type="submit" name="refresh" id="refresh" value="{$lang->refresh}" onclick="return question.refresh();" />
-</div>]]></template>
-		<template name="member_register_regimage" version="1806"><![CDATA[<script type="text/javascript" src="{$mybb->asset_url}/jscripts/captcha.js?ver=1806"></script>
-<legend>{$lang->image_verification}</legend>
-<div data-role="fieldcontain">
-<label for="imagestring">{$lang->verification_note}<br />{$lang->verification_subnote}</label>
-<img src="captcha.php?action=regimage&amp;imagehash={$imagehash}" alt="{$lang->image_verification}" id="captcha_img" />
-</div>
-<div data-role="fieldcontain">
-<label for="imagestring"></label>
-<input type="submit" name="refresh" id="refresh" value="{$lang->refresh}" onclick="return captcha.refresh();" />
-</div>
-<div data-role="fieldcontain">
-<label for="imagestring"></label>
-<input type="text" name="imagestring" value="" id="imagestring" />
-</div>
-<input type="hidden" name="imagehash" value="{$imagehash}" id="imagehash" />]]></template>
 		<template name="multipage" version="1806"><![CDATA[</div>
 <div data-role="footer" data-id="foo1" data-position="fixed">
 <div data-role="navbar">

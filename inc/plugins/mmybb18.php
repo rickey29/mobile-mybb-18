@@ -2,7 +2,7 @@
 /*
 	project: Mobile MyBB 1.8 (MMyBB18)
 	file:    MYBB_ROOT/inc/plugins/mmybb18.php
-	version: 1.3.0
+	version: 1.4.0
 	author:  Rickey Gu
 	web:     http://flexplat.com
 	email:   rickey29@gmail.com
@@ -15,18 +15,18 @@ if ( !defined("IN_MYBB") )
 }
 
 
-$plugins->add_hook('error', 'mphpbb18_error');
-$plugins->add_hook('global_end', 'mphpbb18_global_end');
-$plugins->add_hook('global_intermediate', 'mphpbb18_global_intermediate');
-$plugins->add_hook('global_start', 'mphpbb18_global_start');
-$plugins->add_hook('index_end', 'mphpbb18_index_end');
-$plugins->add_hook('member_login_end', 'mphpbb18_member_login_end');
-$plugins->add_hook('member_profile_end', 'mphpbb18_member_profile_end');
-$plugins->add_hook('member_register_end', 'mphpbb18_member_register_end');
-$plugins->add_hook('newreply_start', 'mphpbb18_newreply_start');
-$plugins->add_hook('newthread_start', 'mphpbb18_newthread_start');
-$plugins->add_hook('pre_output_page', 'mphpbb18_pre_output_page');
-$plugins->add_hook('redirect', 'mphpbb18_redirect');
+$plugins->add_hook('error', 'mmybb18_error');
+$plugins->add_hook('global_end', 'mmybb18_global_end');
+$plugins->add_hook('global_intermediate', 'mmybb18_global_intermediate');
+$plugins->add_hook('global_start', 'mmybb18_global_start');
+$plugins->add_hook('index_end', 'mmybb18_index_end');
+$plugins->add_hook('member_login_end', 'mmybb18_member_login_end');
+$plugins->add_hook('member_profile_end', 'mmybb18_member_profile_end');
+$plugins->add_hook('member_register_end', 'mmybb18_member_register_end');
+$plugins->add_hook('newreply_start', 'mmybb18_newreply_start');
+$plugins->add_hook('newthread_start', 'mmybb18_newthread_start');
+$plugins->add_hook('pre_output_page', 'mmybb18_pre_output_page');
+$plugins->add_hook('redirect', 'mmybb18_redirect');
 
 
 function mmybb18_info()
@@ -37,7 +37,7 @@ function mmybb18_info()
 		"website"       => "http://flexplat.com/mobile-mybb-18",
 		"author"        => "Rickey Gu",
 		"authorsite"    => "http://flexplat.com",
-		"version"       => "1.3.0",
+		"version"       => "1.4.0",
 		"guid"          => str_replace('.php', '', basename(__FILE__)),
 		"codename"      => str_replace('.php', '', basename(__FILE__)),
 		"compatibility" => "18*"
@@ -114,7 +114,7 @@ function mmybb18_deactivate()
 }
 
 
-function mphpbb18_inline_error($errors, $title)
+function mmybb18_inline_error($errors, $title)
 {
 	global $lang;
 
@@ -151,7 +151,7 @@ function mphpbb18_inline_error($errors, $title)
 }
 
 
-function mphpbb18_error($error)
+function mmybb18_error($error)
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -176,7 +176,7 @@ function mphpbb18_error($error)
 	return $error;
 }
 
-function mphpbb18_global_end()
+function mmybb18_global_end()
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -193,7 +193,7 @@ function mphpbb18_global_end()
 	}
 }
 
-function mphpbb18_global_intermediate()
+function mmybb18_global_intermediate()
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -209,7 +209,7 @@ function mphpbb18_global_intermediate()
 	}
 }
 
-function mphpbb18_global_start()
+function mmybb18_global_start()
 {
 	require(MYBB_ROOT . 'inc/plugins/mmybb18/lib/detection.php');
 
@@ -261,17 +261,23 @@ function mphpbb18_global_start()
 		my_setcookie('mybb[m_style]', 'mobile');
 	}
 
-	define('MMYBB18', 'Mobile');
-
 	$name = 'Mobile MyBB 1.8';
 	$query = $db->simple_select("themes", "tid", "name='".$db->escape_string($name)."'", array("limit" => 1));
 	$theme = $db->fetch_array($query);
+
+	if ( empty($theme) )
+	{
+		return;
+	}
+
+	define('MMYBB18', 'Mobile');
+
 	$mybb->user['style'] = $theme['tid'];
 
 	$lang->load("mmybb18");
 }
 
-function mphpbb18_index_end()
+function mmybb18_index_end()
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -287,7 +293,7 @@ function mphpbb18_index_end()
 	}
 }
 
-function mphpbb18_member_login_end()
+function mmybb18_member_login_end()
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -296,13 +302,13 @@ function mphpbb18_member_login_end()
 
 	global $errors, $title, $inline_errors, $member_loggedin_notice;
 
-	$inline_errors = mphpbb18_inline_error($errors, $title);
+	$inline_errors = mmybb18_inline_error($errors, $title);
 
 	$pattern = '#<a[^>]*>\s*(.*)\s*</a>#i';
 	$member_loggedin_notice = preg_replace($pattern, '$1', $member_loggedin_notice);
 }
 
-function mphpbb18_member_profile_end()
+function mmybb18_member_profile_end()
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -319,7 +325,7 @@ function mphpbb18_member_profile_end()
 	$bannedbit = preg_replace($pattern, '<a href="' . '$1' . '" rel="external">' . '$2' . '</a>', $bannedbit);
 }
 
-function mphpbb18_member_register_end()
+function mmybb18_member_register_end()
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -328,10 +334,10 @@ function mphpbb18_member_register_end()
 
 	global $errors, $title, $regerrors;
 
-	$regerrors = mphpbb18_inline_error($errors, $title);
+	$regerrors = mmybb18_inline_error($errors, $title);
 }
 
-function mphpbb18_newreply_start()
+function mmybb18_newreply_start()
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -347,10 +353,10 @@ function mphpbb18_newreply_start()
 	$lang->close_thread = preg_replace($pattern, '', $lang->close_thread);
 	$lang->stick_thread = preg_replace($pattern, '', $lang->stick_thread);
 
-	$reply_errors = mphpbb18_inline_error($post_errors, $title);
+	$reply_errors = mmybb18_inline_error($post_errors, $title);
 }
 
-function mphpbb18_newthread_start()
+function mmybb18_newthread_start()
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -366,10 +372,10 @@ function mphpbb18_newthread_start()
 	$lang->close_thread = preg_replace($pattern, '', $lang->close_thread);
 	$lang->stick_thread = preg_replace($pattern, '', $lang->stick_thread);
 
-	$thread_errors = mphpbb18_inline_error($post_errors, $title);
+	$thread_errors = mmybb18_inline_error($post_errors, $title);
 }
 
-function mphpbb18_pre_output_page($contents)
+function mmybb18_pre_output_page($contents)
 {
 	if ( !defined('MMYBB18') )
 	{
@@ -411,7 +417,7 @@ function mphpbb18_pre_output_page($contents)
 	return $contents2;
 }
 
-function mphpbb18_redirect($redirect_args)
+function mmybb18_redirect($redirect_args)
 {
 	if ( !defined('MMYBB18') )
 	{
