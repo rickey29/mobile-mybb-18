@@ -2,7 +2,7 @@
 /*
 	project: Mobile MyBB 1.8 (MMyBB18)
 	file:    MYBB_ROOT/inc/plugins/mmybb18.php
-	version: 1.4.0
+	version: 1.5.0
 	author:  Rickey Gu
 	web:     http://flexplat.com
 	email:   rickey29@gmail.com
@@ -32,15 +32,15 @@ $plugins->add_hook('redirect', 'mmybb18_redirect');
 function mmybb18_info()
 {
 	return array(
-		"name"          => "Mobile MyBB 1.8",
-		"description"   => "Mobile MyBB 1.8 (MMyBB18) is a mobile-friendly MyBB 1.8 theme.",
-		"website"       => "http://flexplat.com/mobile-mybb-18",
-		"author"        => "Rickey Gu",
-		"authorsite"    => "http://flexplat.com",
-		"version"       => "1.4.0",
-		"guid"          => str_replace('.php', '', basename(__FILE__)),
-		"codename"      => str_replace('.php', '', basename(__FILE__)),
-		"compatibility" => "18*"
+		'name'          => 'Mobile MyBB 1.8',
+		'description'   => 'Mobile MyBB 1.8 (MMyBB18) is a mobile-friendly MyBB 1.8 theme.',
+		'website'       => 'http://flexplat.com/mobile-mybb-18',
+		'author'        => 'Rickey Gu',
+		'authorsite'    => 'http://flexplat.com',
+		'version'       => '1.5.0',
+		'guid'          => str_replace('.php', '', basename(__FILE__)),
+		'codename'      => str_replace('.php', '', basename(__FILE__)),
+		'compatibility' => '18*'
 	);
 }
 
@@ -102,15 +102,15 @@ function mmybb18_deactivate()
 	global $db;
 
 	$name = 'Mobile MyBB 1.8';
-	$query = $db->simple_select("themes", "tid", "name='".$db->escape_string($name)."'", array("limit" => 1));
+	$query = $db->simple_select('themes', 'tid', 'name="' . $db->escape_string($name) . '"', array('limit' => 1));
 	$theme = $db->fetch_array($query);
-	$db->delete_query("themes", "tid='{$theme['tid']}'");
+	$db->delete_query('themes', 'tid="' . $theme['tid'] . '"');
 
 	$title = 'Mobile MyBB 1.8 Templates';
-	$query = $db->simple_select("templatesets", "sid", "title='".$db->escape_string($title)."'", array("limit" => 1));
+	$query = $db->simple_select('templatesets', 'sid', 'title="' . $db->escape_string($title) . '"', array('limit' => 1));
 	$templateset = $db->fetch_array($query);
-	$db->delete_query("templatesets", "sid='{$templateset['sid']}'");
-	$db->delete_query("templates", "sid='{$templateset['sid']}'");
+	$db->delete_query('templatesets', 'sid="' . $templateset['sid'] . '"');
+	$db->delete_query('templates', 'sid="' . $templateset['sid'] . '"');
 }
 
 
@@ -148,6 +148,25 @@ function mmybb18_inline_error($errors, $title)
 </li>';
 
 	return $inline_error;
+}
+
+function mmybb18_get_input($name, $template)
+{
+	global $mybb;
+
+	$value = $mybb->get_input($name);
+	if ( !empty($value) )
+	{
+		return $value;
+	}
+
+	$pattern = '#<input\stype="hidden"\sname="' . $name . '"\svalue="([^"]+)"\sid="[^"]+"\s/>#i';
+	if ( preg_match($pattern, $template, $matches) )
+	{
+		$value = $matches[1];
+	}
+
+	return $value;
 }
 
 
@@ -205,7 +224,7 @@ function mmybb18_global_intermediate()
 
 	if ( !empty($lang->personal_header) )
 	{
-		eval('$header_personal = "'.$templates->get('header_personal').'";');
+		eval('$header_personal = "' . $templates->get('header_personal') . '";');
 	}
 }
 
@@ -220,52 +239,90 @@ function mmybb18_global_start()
 		return;
 	}
 
-	if ( isset($mybb->user['style']) && (int)$mybb->user['style'] != 0 )
+	$name = 'Mobile MyBB 1.8';
+	$query = $db->simple_select('themes', 'tid', 'name="' . $db->escape_string($name) . '"', array('limit' => 1));
+	$theme = $db->fetch_array($query);
+	if ( empty($theme) )
 	{
 		return;
+	}
+
+	if ( !empty($mybb->input['theme']) )
+	{
+		if ( (int)$mybb->input['theme'] != $theme['tid'] )
+		{
+			return;
+		}
+
+		$mybb_redirection = 'mobile';
+	}
+
+	if ( !empty($mybb->user['style']) )
+	{
+		if ( (int)$mybb->user['style'] != $theme['tid'] )
+		{
+			return;
+		}
+
+		$mybb_style = 'mobile';
+	}
+
+	if ( !empty($mybb->cookies['mybbtheme']) )
+	{
+		if ( (int)$mybb->cookies['mybbtheme'] != $theme['tid'] )
+		{
+			return;
+		}
+
+		$mybb_style = 'mobile';
 	}
 
 	$redirection = !empty($mybb->input['m-redirection']) ? $mybb->input['m-redirection'] : '';
-	if ( !empty($redirection) && $redirection != 'mobile' )
-	{
-		// make the cookie expires in a year time: 60 * 60 * 24 * 365 = 31,536,000
-		my_setcookie('mybb[m_style]', 'desktop');
-
-		return;
-	}
-
 	$style = !empty($mybb->cookies['mybb']['m_style']) ? $mybb->cookies['mybb']['m_style'] : '';
-	if ( empty($redirection) && !empty($style) && $style == 'desktop' )
-	{
-		return;
-	}
 
-	if ( empty($style) || $style == 'desktop' )
+	if ( !empty($mybb_redirection) )
+	{
+		$device = $mybb_redirection;
+
+		// make the cookie expires right now
+		my_setcookie('mybb[m_style]', '', time() - 3600);
+	}
+	elseif ( !empty($redirection) )
+	{
+		$device = ( $redirection != 'mobile' && empty($mybb_style) ) ? 'desktop' : 'mobile';
+
+		// make the cookie expires in a year time: 60 * 60 * 24 * 365 = 31,536,000
+		my_setcookie('mybb[m_style]', $device);
+	}
+	elseif ( !empty($style) )
+	{
+		$device = ( $style != 'mobile' && empty($mybb_style) ) ? 'desktop' : 'mobile';
+
+		// make the cookie expires in a year time: 60 * 60 * 24 * 365 = 31,536,000
+		my_setcookie('mybb[m_style]', $device);
+	}
+	elseif ( !empty($mybb_style) )
+	{
+		$device = $mybb_style;
+
+		// make the cookie expires right now
+		my_setcookie('mybb[m_style]', '', time() - 3600);
+	}
+	else
 	{
 		$data = array();
 		$data['user_agent'] = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
 		$data['accept'] = !empty($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : '';
 		$data['profile'] = !empty($_SERVER['HTTP_PROFILE']) ? $_SERVER['HTTP_PROFILE'] : '';
+		$device = mmybb18_get_device($data);
 
-		$device = m_get_device($data);
-
-		if ( $device == 'desktop' || $device == 'bot' )
-		{
-			// make the cookie expires in a year time: 60 * 60 * 24 * 365 = 31,536,000
-			my_setcookie('mybb[m_style]', 'desktop');
-
-			return;
-		}
+		$device = ( $device == 'desktop' || $device == 'bot' ) ? 'desktop' : 'mobile';
 
 		// make the cookie expires in a year time: 60 * 60 * 24 * 365 = 31,536,000
-		my_setcookie('mybb[m_style]', 'mobile');
+		my_setcookie('mybb[m_style]', $device);
 	}
 
-	$name = 'Mobile MyBB 1.8';
-	$query = $db->simple_select("themes", "tid", "name='".$db->escape_string($name)."'", array("limit" => 1));
-	$theme = $db->fetch_array($query);
-
-	if ( empty($theme) )
+	if ( $device != 'mobile' )
 	{
 		return;
 	}
@@ -274,7 +331,7 @@ function mmybb18_global_start()
 
 	$mybb->user['style'] = $theme['tid'];
 
-	$lang->load("mmybb18");
+	$lang->load('mmybb18');
 }
 
 function mmybb18_index_end()
@@ -289,7 +346,7 @@ function mmybb18_index_end()
 
 	if ( !empty($lang->personal_footer) )
 	{
-		eval('$footer_personal = "'.$templates->get('footer_personal').'";');
+		eval('$footer_personal = "' . $templates->get('footer_personal') . '";');
 	}
 }
 
@@ -332,9 +389,276 @@ function mmybb18_member_register_end()
 		return;
 	}
 
+	global $templates;
 	global $errors, $title, $regerrors;
+	global $passboxes, $regimage, $questionbox, $tzselect, $boardlanguage, $time;
+	global $allownoticescheck, $hideemailcheck, $receivepmscheck, $pmnoticecheck, $pmnotifycheck, $invisiblecheck;
 
 	$regerrors = mmybb18_inline_error($errors, $title);
+
+	$template = &$templates->cache['member_register'];
+
+	$user = array(
+		'username' => mmybb18_get_input('username', $template),
+		'password' => mmybb18_get_input('password', $passboxes),
+		'password2' => mmybb18_get_input('password2', $passboxes),
+		'email' => mmybb18_get_input('email', $template),
+		'email2' => mmybb18_get_input('email2', $template),
+		'imagestring' => mmybb18_get_input('imagestring', $regimage),
+		'imagehash' => mmybb18_get_input('imagehash', $regimage),
+		'answer' => mmybb18_get_input('answer', $questionbox),
+		'question_id' => mmybb18_get_input('question_id', $questionbox),
+		'allownotices' => mmybb18_get_input('allownotices', $template),
+		'allownoticescheck' => mmybb18_get_input('allownoticescheck', $template),
+		'hideemail' => mmybb18_get_input('hideemail', $template),
+		'hideemailcheck' => mmybb18_get_input('hideemailcheck', $template),
+		'receivepms' => mmybb18_get_input('receivepms', $template),
+		'receivepmscheck' => mmybb18_get_input('receivepmscheck', $template),
+		'pmnotice' => mmybb18_get_input('pmnotice', $template),
+		'pmnoticecheck' => mmybb18_get_input('pmnoticecheck', $template),
+		'pmnotify' => mmybb18_get_input('pmnotify', $template),
+		'pmnotifycheck' => mmybb18_get_input('pmnotifycheck', $template),
+		'invisible' => mmybb18_get_input('invisible', $template),
+		'invisiblecheck' => mmybb18_get_input('invisiblecheck', $template),
+		'subscriptionmethod' => mmybb18_get_input('subscriptionmethod', $template),
+		'timezone' => mmybb18_get_input('timezoneoffset', $tzselect),
+		'dstcorrection' => mmybb18_get_input('dstcorrection', $template),
+		'language' => mmybb18_get_input('language', $boardlanguage),
+		'regtime' => mmybb18_get_input('regtime', $template),
+		'status' => mmybb18_get_input('status', $template),
+	);
+
+	if ( $user['status'] === '' )
+	{
+		$user['status'] = 1;
+	}
+	else
+	{
+		$user['status']++;
+		$user['status'] = !empty($questionbox) ? ( $user['status'] % 8 ) : ( $user['status'] % 7 );
+	}
+
+	if ( !empty($allownoticescheck) )
+	{
+		$user['allownoticescheck'] = 'checked';
+	}
+
+	if ( !empty($hideemailcheck) )
+	{
+		$user['hideemailcheck'] = 'checked';
+	}
+
+	if ( !empty($receivepmscheck) )
+	{
+		$user['receivepmscheck'] = 'checked';
+	}
+
+	if ( !empty($pmnoticecheck) )
+	{
+		$user['pmnoticecheck'] = 'checked';
+	}
+
+	if ( !empty($pmnotifycheck) )
+	{
+		$user['pmnotifycheck'] = 'checked';
+	}
+
+	if ( !empty($invisiblecheck) )
+	{
+		$user['invisiblecheck'] = 'checked';
+	}
+
+	if ( $user['status'] == 6 )
+	{
+		$pattern = '#imagehash=([^"]+)"#i';
+		if ( preg_match($pattern, $regimage, $matches) )
+		{
+			$user['imagehash'] = $matches[1];
+		}
+	}
+
+	if ( $user['regtime'] === '' )
+	{
+		$user['regtime'] = (string)($time - 10);
+	}
+
+	if ( $user['status'] != 0 )
+	{
+		$regerrors = '';
+	}
+
+	if ( $user['status'] != 1 )
+	{
+		$pattern = '#<legend>{\$lang->account_details}</legend>#i';
+		$template = preg_replace($pattern, '', $template);
+
+		$pattern = '#<div data-role="fieldcontain">[^\$]+{\$lang->username}.+</div>#isU';
+		$pattern2 = '<input type="hidden" name="username" value="' . $user['username'] . '" id="username" />';
+		$template = preg_replace($pattern, $pattern2, $template);
+
+		$passboxes = '<input type="hidden" name="password" value="' . $user['password'] . '" id="password" />
+<input type="hidden" name="password2" value="' . $user['password2'] . '" id="password2" />';
+	}
+
+	if ( $user['status'] != 2 )
+	{
+		$pattern = '#<div data-role="fieldcontain">[^\$]+{\$lang->email}.+</div>#isU';
+		$pattern2 = '<input type="hidden" name="email" value="' . $user['email'] . '" id="email" />';
+		$template = preg_replace($pattern, $pattern2, $template);
+
+		$pattern = '#<div data-role="fieldcontain">[^\$]+{\$lang->confirm_email}.+</div>#isU';
+		$pattern2 = '<input type="hidden" name="email2" value="' . $user['email2'] . '" id="email2" />';
+		$template = preg_replace($pattern, $pattern2, $template);
+	}
+
+	if ( $user['status'] != 3 )
+	{
+		$pattern = '#<legend>{\$lang->account_prefs}</legend>#i';
+		$template = preg_replace($pattern, '', $template);
+
+		$pattern = '#<div data-role="fieldcontain">[^\$]+{\$allownoticescheck}.+</div>#isU';
+		$pattern2 = '<input type="hidden" name="allownotices" value="' . $user['allownotices'] . '" id="allownotices" />
+<input type="hidden" name="allownoticescheck" value="' . $user['allownoticescheck'] . '" id="allownoticescheck" />
+<input type="hidden" name="hideemail" value="' . $user['hideemail'] . '" id="hideemail" />
+<input type="hidden" name="hideemailcheck" value="' . $user['hideemailcheck'] . '" id="hideemailcheck" />
+<input type="hidden" name="receivepms" value="' . $user['receivepms'] . '" id="receivepms" />
+<input type="hidden" name="receivepmscheck" value="' . $user['receivepmscheck'] . '" id="receivepmscheck" />
+<input type="hidden" name="pmnotice" value="' . $user['pmnotice'] . '" id="pmnotice" />
+<input type="hidden" name="pmnoticecheck" value="' . $user['pmnoticecheck'] . '" id="pmnoticecheck" />
+<input type="hidden" name="pmnotify" value="' . $user['pmnotify'] . '" id="pmnotify" />
+<input type="hidden" name="pmnotifycheck" value="' . $user['pmnotifycheck'] . '" id="pmnotifycheck" />
+<input type="hidden" name="invisible" value="' . $user['invisible'] . '" id="invisible" />
+<input type="hidden" name="invisiblecheck" value="' . $user['invisiblecheck'] . '" id="invisiblecheck" />';
+		$template = preg_replace($pattern, $pattern2, $template);
+	}
+	else
+	{
+		$pattern = '#<input type="checkbox" name="allownotices" id="allownotices" value="1" {\$allownoticescheck} />#i';
+		if ( !empty($user['allownoticescheck']) )
+		{
+			$pattern2 = '<input type="checkbox" name="allownotices" id="allownotices" value="1" checked="checked" />';
+		}
+		else
+		{
+			$pattern2 = '<input type="checkbox" name="allownotices" id="allownotices" value="1" />';
+		}
+		$template = preg_replace($pattern, $pattern2, $template);
+
+		$pattern = '#<input type="checkbox" name="hideemail" id="hideemail" value="1" {\$hideemailcheck} />#i';
+		if ( !empty($user['hideemailcheck']) )
+		{
+			$pattern2 = '<input type="checkbox" name="hideemail" id="hideemail" value="1" checked="checked" />';
+		}
+		else
+		{
+			$pattern2 = '<input type="checkbox" name="hideemail" id="hideemail" value="1" />';
+		}
+		$template = preg_replace($pattern, $pattern2, $template);
+
+		$pattern = '#<input type="checkbox" name="receivepms" id="receivepms" value="1" {\$receivepmscheck} />#i';
+		if ( !empty($user['receivepmscheck']) )
+		{
+			$pattern2 = '<input type="checkbox" name="receivepms" id="receivepms" value="1" checked="checked" />';
+		}
+		else
+		{
+			$pattern2 = '<input type="checkbox" name="receivepms" id="receivepms" value="1" />';
+		}
+		$template = preg_replace($pattern, $pattern2, $template);
+
+		$pattern = '#<input type="checkbox" name="pmnotice" id="pmnotice" value="1"{\$pmnoticecheck} />#i';
+		if ( !empty($user['pmnoticecheck']) )
+		{
+			$pattern2 = '<input type="checkbox" name="pmnotice" id="pmnotice" value="1" checked="checked" />';
+		}
+		else
+		{
+			$pattern2 = '<input type="checkbox" name="pmnotice" id="pmnotice" value="1" />';
+		}
+		$template = preg_replace($pattern, $pattern2, $template);
+
+		$pattern = '#<input type="checkbox" name="pmnotify" id="pmnotify" value="1" {\$pmnotifycheck} />#i';
+		if ( !empty($user['pmnotifycheck']) )
+		{
+			$pattern2 = '<input type="checkbox" name="pmnotify" id="pmnotify" value="1" checked="checked" />';
+		}
+		else
+		{
+			$pattern2 = '<input type="checkbox" name="pmnotify" id="pmnotify" value="1" />';
+		}
+		$template = preg_replace($pattern, $pattern2, $template);
+
+		$pattern = '#<input type="checkbox" name="invisible" id="invisible" value="1" {\$invisiblecheck} />#i';
+		if ( !empty($user['invisiblecheck']) )
+		{
+			$pattern2 = '<input type="checkbox" name="invisible" id="invisible" value="1" checked="checked" />';
+		}
+		else
+		{
+			$pattern2 = '<input type="checkbox" name="invisible" id="invisible" value="1" />';
+		}
+		$template = preg_replace($pattern, $pattern2, $template);
+	}
+
+	if ( $user['status'] != 4 )
+	{
+		$pattern = '#<div data-role="fieldcontain">[^\$]+{\$lang->subscription_method}.+</div>#isU';
+		$pattern2 = '<input type="hidden" name="subscriptionmethod" value="' . $user['subscriptionmethod'] . '" id="subscriptionmethod" />';
+		$template = preg_replace($pattern, $pattern2, $template);
+	}
+
+	if ( ( $user['status'] != 4 ) && !empty($boardlanguage) )
+	{
+		$boardlanguage = '<input type="hidden" name="language" value="' . $user['language'] . '" id="language" />';
+	}
+
+	if ( $user['status'] != 5 )
+	{
+		$pattern = '#<legend>{\$lang->time_offset}</legend>#i';
+		$template = preg_replace($pattern, '', $template);
+
+		$pattern = '#<div data-role="fieldcontain">[^\$]+{\$lang->time_offset_desc}.+</div>#isU';
+		$pattern2 = '<input type="hidden" name="timezoneoffset" value="' . $user['timezone'] . '" id="timezoneoffset" />';
+		$template = preg_replace($pattern, $pattern2, $template);
+
+		$pattern = '#<div data-role="fieldcontain">[^\$]+{\$lang->dst_correction}.+</div>#isU';
+		$pattern2 = '<input type="hidden" name="dstcorrection" value="' . $user['dstcorrection'] . '" id="dstcorrection" />';
+		$template = preg_replace($pattern, $pattern2, $template);
+	}
+
+	if ( $user['status'] != 6 )
+	{
+		$regimage = '<input type="hidden" name="imagestring" value="' . $user['imagestring'] . '" id="imagestring" />
+<input type="hidden" name="imagehash" value="' . $user['imagehash'] . '" id="imagehash" />';
+	}
+	else
+	{
+		$pattern = '#<input type="hidden" name="imagehash" value="[^"]+" id="imagehash" />#i';
+		$pattern2 = '<input type="hidden" name="imagehash" value="' . $user['imagehash'] . '" id="imagehash" />';
+		$regimage = preg_replace($pattern, $pattern2, $regimage);
+	}
+
+	if ( ( $user['status'] != 7 ) && !empty($questionbox) )
+	{
+		$questionbox = '<input type="hidden" name="answer" value="' . $user['answer'] . '" id="answer" />
+<input type="hidden" name="question_id" value="' . $user['question_id'] . '" id="question_id" />';
+	}
+
+	$pattern = '#<input type="hidden" name="regtime" value="{\$time}" />#i';
+	$pattern2 = '<input type="hidden" name="regtime" value="' . $user['regtime'] . '" />';
+	$template = preg_replace($pattern, $pattern2, $template);
+
+	$pattern = '#<input type="hidden" name="action" value="do_register" />#i';
+	$pattern2 = '<input type="hidden" name="action" value="do_register" />
+<input type="hidden" name="status" value="' . $user['status'] . '" id="status" />';
+	$template = preg_replace($pattern, $pattern2, $template);
+
+	if ( ( ( $user['status'] != 7 ) && !empty($questionbox) ) || ( ( $user['status'] != 6 ) && empty($questionbox) ) )
+	{
+		$pattern = '#<input type="submit" name="regsubmit" value="{\$lang->submit_registration}" data-theme="a" />#i';
+		$pattern2 = '<input type="submit" name="regsubmit" value="{\$lang->continue_registration}" data-theme="a" />';
+		$template = preg_replace($pattern, $pattern2, $template);
+	}
 }
 
 function mmybb18_newreply_start()
@@ -432,4 +756,3 @@ function mmybb18_redirect($redirect_args)
 
 	return $redirect_args;
 }
-?>

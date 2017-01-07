@@ -1,7 +1,7 @@
 Mobile MyBB 1.8 Readme
 ################
-version: 1.4.0
-last update: Mon., Jul. 25, 2016
+version: 1.5.0
+last update: Sat., Jan. 07, 2017
 
 
 Description
@@ -27,7 +27,7 @@ Open Issue
 
 Infrastructure
 ++++++++++++++++
-This version is developed based on MyBB version 1.8.0 to 1.8.7.
+This version is developed based on MyBB version 1.8.0 to 1.8.9.
 
 
 Installation
@@ -57,7 +57,11 @@ Since I often have to update this section after I release the package, so I prov
 
 History
 ++++++++++++++++
-version 1.4.0 (Mon., Jul. 25, 2015)
+version 1.5.0 (Sat., Jan. 07, 2017)
+-- bug fix: theme switching issue from quick theme select and/or user profile
+-- bug fix: scrolling issue for registration
+
+version 1.4.0 (Mon., Jul. 25, 2016)
 -- bug fix: remove register feature because of scroll issue
 
 version 1.3.0 (Fri., Dec. 25, 2015)

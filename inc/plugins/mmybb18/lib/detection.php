@@ -2,7 +2,7 @@
 /*
 	project: Mobile MyBB 1.8 (MMyBB18)
 	file:    MYBB_ROOT/inc/plugins/mmybb18/lib/detection.php
-	version: 1.4.0
+	version: 1.5.0
 	author:  Rickey Gu
 	web:     http://flexplat.com
 	email:   rickey29@gmail.com
@@ -14,7 +14,7 @@ if ( !defined("IN_MYBB") )
 }
 
 
-function m_get_device($data)
+function mmybb18_get_device($data)
 {
 	$device_list = array(
 		// Apple iOS
