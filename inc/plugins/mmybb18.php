@@ -2,7 +2,7 @@
 /*
 	project: Mobile MyBB 1.8 (MMyBB18)
 	file:    MYBB_ROOT/inc/plugins/mmybb18.php
-	version: 1.5.0
+	version: 1.6.0
 	author:  Rickey Gu
 	web:     http://flexplat.com
 	email:   rickey29@gmail.com
@@ -16,7 +16,6 @@ if ( !defined("IN_MYBB") )
 
 
 $plugins->add_hook('error', 'mmybb18_error');
-$plugins->add_hook('global_end', 'mmybb18_global_end');
 $plugins->add_hook('global_intermediate', 'mmybb18_global_intermediate');
 $plugins->add_hook('global_start', 'mmybb18_global_start');
 $plugins->add_hook('index_end', 'mmybb18_index_end');
@@ -37,7 +36,7 @@ function mmybb18_info()
 		'website'       => 'http://flexplat.com/mobile-mybb-18',
 		'author'        => 'Rickey Gu',
 		'authorsite'    => 'http://flexplat.com',
-		'version'       => '1.5.0',
+		'version'       => '1.6.0',
 		'guid'          => str_replace('.php', '', basename(__FILE__)),
 		'codename'      => str_replace('.php', '', basename(__FILE__)),
 		'compatibility' => '18*'
@@ -51,12 +50,6 @@ function mmybb18_install()
 function mmybb18_is_installed()
 {
 	$file = MYBB_ROOT . 'inc/plugins/mmybb18/Mobile MyBB 1.8-theme.xml';
-	if ( !file_exists($file) )
-	{
-		return false;
-	}
-
-	$file = MYBB_ROOT . 'inc/languages/english/mmybb18.lang.php';
 	if ( !file_exists($file) )
 	{
 		return false;
@@ -169,6 +162,42 @@ function mmybb18_get_input($name, $template)
 	return $value;
 }
 
+function mmybb18_update_user_theme()
+{
+	global $mybb;
+
+	require_once MYBB_ROOT . 'inc/datahandlers/user.php';
+	$userhandler = new UserDataHandler('update');
+
+	$user = array(
+		'uid' => $mybb->user['uid'],
+		'style' => 0,
+		'usergroup' => $mybb->user['usergroup'],
+		'additionalgroups' => $mybb->user['additionalgroups']
+	);
+
+	$userhandler->set_data($user);
+
+	if ( $userhandler->validate_user() )
+	{
+		$mybb->user['style'] = $user['style'];
+
+		if ( $mybb->user['uid'] )
+		{
+			if ( isset($mybb->cookies['mybbtheme']) )
+			{
+				my_unsetcookie('mybbtheme');
+			}
+
+			$userhandler->update_user();
+		}
+		else
+		{
+			my_setcookie('mybbtheme', $user['style']);
+		}
+	}
+}
+
 
 function mmybb18_error($error)
 {
@@ -195,23 +224,6 @@ function mmybb18_error($error)
 	return $error;
 }
 
-function mmybb18_global_end()
-{
-	if ( !defined('MMYBB18') )
-	{
-		return;
-	}
-
-	global $lang;
-	global $headerinclude;
-
-	if ( $lang->settings['rtl'] == 1 )
-	{
-		$pattern = '#(jquery\.mobile\-\d+\.\d+\.\d+)(\.min\.css)#i';
-		$headerinclude = preg_replace($pattern, '$1' . '.rtl' . '$2', $headerinclude);
-	}
-}
-
 function mmybb18_global_intermediate()
 {
 	if ( !defined('MMYBB18') )
@@ -230,9 +242,13 @@ function mmybb18_global_intermediate()
 
 function mmybb18_global_start()
 {
-	require(MYBB_ROOT . 'inc/plugins/mmybb18/lib/detection.php');
-
 	global $mybb, $db, $lang;
+
+	$file = MYBB_ROOT . 'inc/plugins/mmybb18p/Mobile MyBB 1.8 Premium-theme.xml';
+	if ( file_exists($file) )
+	{
+		return;
+	}
 
 	if ( defined("IN_ADMINCP") )
 	{
@@ -246,35 +262,54 @@ function mmybb18_global_start()
 	{
 		return;
 	}
+	$mobile_tid = $theme['tid'];
 
-	if ( !empty($mybb->input['theme']) )
+	$query = $db->simple_select('themes', 'tid', 'def=1', array('limit' => 1));
+	$theme = $db->fetch_array($query);
+	if ( empty($theme) )
 	{
-		if ( (int)$mybb->input['theme'] != $theme['tid'] )
-		{
-			return;
-		}
-
-		$mybb_redirection = 'mobile';
+		return;
 	}
+	$default_tid = $theme['tid'];
 
-	if ( !empty($mybb->user['style']) )
+	if ( isset($mybb->input['theme']) )
 	{
-		if ( (int)$mybb->user['style'] != $theme['tid'] )
+		$mybb->input['theme'] = (int)$mybb->input['theme'];
+
+		if ( $mybb->input['theme'] == $mobile_tid )
+		{
+			$mybb_redirection = 'mobile';
+		}
+		elseif ( $mybb->input['theme'] != 0 && $mybb->input['theme'] != $default_tid )
 		{
 			return;
 		}
-
-		$mybb_style = 'mobile';
 	}
-
-	if ( !empty($mybb->cookies['mybbtheme']) )
+	elseif ( $mybb->user['uid'] )
 	{
-		if ( (int)$mybb->cookies['mybbtheme'] != $theme['tid'] )
+		$mybb->user['style'] = (int)$mybb->user['style'];
+
+		if ( $mybb->user['style'] == $mobile_tid )
+		{
+			$mybb_style = 'mobile';
+		}
+		elseif ( $mybb->user['style'] != 0 && $mybb->user['style'] != $default_tid )
 		{
 			return;
 		}
+	}
+	else
+	{
+		$mybb->cookies['mybbtheme'] = (int)$mybb->cookies['mybbtheme'];
 
-		$mybb_style = 'mobile';
+		if ( $mybb->cookies['mybbtheme'] == $mobile_tid )
+		{
+			$mybb_style = 'mobile';
+		}
+		elseif ( $mybb->cookies['mybbtheme'] != 0 && $mybb->cookies['mybbtheme'] != $default_tid )
+		{
+			return;
+		}
 	}
 
 	$redirection = !empty($mybb->input['m-redirection']) ? $mybb->input['m-redirection'] : '';
@@ -285,31 +320,38 @@ function mmybb18_global_start()
 		$device = $mybb_redirection;
 
 		// make the cookie expires right now
-		my_setcookie('mybb[m_style]', '', time() - 3600);
+		my_setcookie('mybb[m_style]', '', -1);
 	}
 	elseif ( !empty($redirection) )
 	{
-		$device = ( $redirection != 'mobile' && empty($mybb_style) ) ? 'desktop' : 'mobile';
+		$device = $redirection != 'mobile' ? 'desktop' : 'mobile';
 
 		// make the cookie expires in a year time: 60 * 60 * 24 * 365 = 31,536,000
 		my_setcookie('mybb[m_style]', $device);
-	}
-	elseif ( !empty($style) )
-	{
-		$device = ( $style != 'mobile' && empty($mybb_style) ) ? 'desktop' : 'mobile';
 
-		// make the cookie expires in a year time: 60 * 60 * 24 * 365 = 31,536,000
-		my_setcookie('mybb[m_style]', $device);
+		if ( !empty($mybb_style) )
+		{
+			mmybb18_update_user_theme();
+		}
 	}
 	elseif ( !empty($mybb_style) )
 	{
 		$device = $mybb_style;
 
 		// make the cookie expires right now
-		my_setcookie('mybb[m_style]', '', time() - 3600);
+		my_setcookie('mybb[m_style]', '', -1);
+	}
+	elseif ( !empty($style) )
+	{
+		$device = $style != 'mobile' ? 'desktop' : 'mobile';
+
+		// make the cookie expires in a year time: 60 * 60 * 24 * 365 = 31,536,000
+		my_setcookie('mybb[m_style]', $device);
 	}
 	else
 	{
+		require(MYBB_ROOT . 'inc/plugins/mmybb18/lib/detection.php');
+
 		$data = array();
 		$data['user_agent'] = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
 		$data['accept'] = !empty($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : '';
@@ -329,7 +371,7 @@ function mmybb18_global_start()
 
 	define('MMYBB18', 'Mobile');
 
-	$mybb->user['style'] = $theme['tid'];
+	$mybb->user['style'] = $mobile_tid;
 
 	$lang->load('mmybb18');
 }
@@ -712,33 +754,16 @@ function mmybb18_pre_output_page($contents)
 	$pattern = '#<title>\s*(.*)\s*</title>#i';
 	if ( preg_match($pattern, $contents, $matches) )
 	{
-		$pattern2 = '#(<h1>)\s*(.*)\s*(</h1>)#i';
-		$contents = preg_replace($pattern2, '$1' . $matches[1] . '$3', $contents);
+		$pattern2 = '#(<h1[^>]*>).*(</h1>)#i';
+		$contents = preg_replace($pattern2, '${1}' . $matches[1] . '${2}', $contents);
 	}
 
-	$pattern = '#<p>\s*</p>#i';
+	$pattern = '#<p[^>]*>\s*</p>#i';
 	$contents = preg_replace($pattern, '', $contents);
 
+	$contents = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $contents);
 
-	$contents2 = '';
-
-	$contents = explode("\n", $contents);
-	foreach ( $contents as $line )
-	{
-		$line = trim($line);
-		if ( empty($line) )
-		{
-			continue;
-		}
-
-		if ( !empty($contents2) )
-		{
-			$contents2 .= "\n";
-		}
-		$contents2 .= $line;
-	}
-
-	return $contents2;
+	return $contents;
 }
 
 function mmybb18_redirect($redirect_args)

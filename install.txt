@@ -4,31 +4,25 @@ Assume your MyBB 1.8 web site is located in: "http://yoursite.com".
 
 step 1:
 ================
-Please backup your database.  This step is not mandatory for MMyBB18 installation.  However, it provides convenience when you want to restore the system in case of any unhappy.
-
-step 2:
-================
 Extract MMyBB18 zip package on your PC, you will get a "mmybb18" directory.
 
-step 3:
+step 2:
 ================
 Upload following directory and files from the "mmybb18" directory to your web site:
 -- inc/languages/english/mmybb18.lang.php
 -- inc/plugins/mmybb18
 -- inc/plugins/mmybb18.php
 
-step 4:
-================
 If you have other language(s) than English, please update your language file(s) as I do for "inc/languages/english/mmybb18.lang.php".
 
-step 5:
+step 3:
 ================
-Go to MyBB 1.8 "Administration Control Panel", select "Plugins" in "Configuration" category of menu, click "Activate" for "Mobile MyBB 1.8".
+Go to MyBB 1.8 "Administration Control Panel", select "Plugins" menu of "Configuration" category, click "Activate" to activate "Mobile MyBB 1.8".
 
-step 6:
+step 4:
 ================
 Set up a sub-domain, such as: "http://m.yoursite.com", which redirects to "http://yoursite.com/?m-redirection=mobile".
 
-step 7:
+step 5:
 ================
 End users can now get mobile-friendly style of your MyBB 1.8 from their mobile web browsers through "http://m.yoursite.com".
