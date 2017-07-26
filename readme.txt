@@ -1,7 +1,7 @@
 Mobile MyBB 1.8 Readme
 ################
-version: 1.6.0
-last update: Sun., Jun. 25, 2017
+version: 1.7.0
+last update: Tue., Jul. 25, 2017
 
 
 Description
@@ -57,6 +57,9 @@ Since I often have to update this section after I release the package, so I prov
 
 History
 ++++++++++++++++
+version 1.7.0 (Tue., Jul. 25, 2017)
+-- new feature: support Right to Left
+
 version 1.6.0 (Sun., Jun. 25, 2017)
 -- retrofit
 

@@ -196,6 +196,9 @@
 <li>
 <a href="{$mybb->settings['bburl']}/index.php?m-redirection=desktop" rel="external">{$lang->desktop_style}</a>
 </li>
+<li>
+<a href="http://flexplat.com/mobile-mybb-18-premium" target="_blank">Accelerated Mobile Pages Theme</a>
+</li>
 </ul>
 </div>
 <div data-role="header" data-position="fixed">
@@ -691,7 +694,7 @@ img { max-width: 100%; height: auto; }
 <head>
 <title>{$thread['subject']}</title>
 {$headerinclude}
-<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/js/scroll_to_hash.js"></script>
+<script src="{$mybb->settings['bburl']}/inc/plugins/mmybb18/themes/jquery/mobile/scroll_to_hash.js"></script>
 </head>
 <body>
 {$header}

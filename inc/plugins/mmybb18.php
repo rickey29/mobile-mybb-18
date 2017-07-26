@@ -2,7 +2,7 @@
 /*
 	project: Mobile MyBB 1.8 (MMyBB18)
 	file:    MYBB_ROOT/inc/plugins/mmybb18.php
-	version: 1.6.0
+	version: 1.7.0
 	author:  Rickey Gu
 	web:     http://flexplat.com
 	email:   rickey29@gmail.com
@@ -36,7 +36,7 @@ function mmybb18_info()
 		'website'       => 'http://flexplat.com/mobile-mybb-18',
 		'author'        => 'Rickey Gu',
 		'authorsite'    => 'http://flexplat.com',
-		'version'       => '1.6.0',
+		'version'       => '1.7.0',
 		'guid'          => str_replace('.php', '', basename(__FILE__)),
 		'codename'      => str_replace('.php', '', basename(__FILE__)),
 		'compatibility' => '18*'
@@ -748,6 +748,8 @@ function mmybb18_pre_output_page($contents)
 		return;
 	}
 
+	global $mybb;
+
 	$pattern = '#<!--.*-->#i';
 	$contents = preg_replace($pattern, '', $contents);
 
@@ -755,7 +757,22 @@ function mmybb18_pre_output_page($contents)
 	if ( preg_match($pattern, $contents, $matches) )
 	{
 		$pattern2 = '#(<h1[^>]*>).*(</h1>)#i';
-		$contents = preg_replace($pattern2, '${1}' . $matches[1] . '${2}', $contents);
+		$contents = preg_replace($pattern2, '$1' . $matches[1] . '$2', $contents);
+	}
+
+	if ( $lang->settings['rtl'] == 1 )
+	{
+		$pattern = '#(<link rel="stylesheet" href=")http://code.jquery.com/mobile/1.3.2/[^"]+(" />)#i';
+		$contents = preg_replace($pattern, '$1' . $mybb->settings['bburl'] . '/inc/plugins/mmybb18/themes/jquery/mobile/1.3.2/jquery.mobile-1.3.2.rtl.min.css' . '$2', $contents);
+	}
+
+	if ( ( !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ) || $_SERVER['SERVER_PORT'] == 443 )
+	{
+		$pattern = '#(<link rel="stylesheet" href=")http://([^"]+" />)#i';
+		$contents = preg_replace($pattern, '$1' . 'https://' . '$2', $contents);
+
+		$pattern = '#(<script src=")http://([^"]+"></script>)#i';
+		$contents = preg_replace($pattern, '$1' . 'https://' . '$2', $contents);
 	}
 
 	$pattern = '#<p[^>]*>\s*</p>#i';
